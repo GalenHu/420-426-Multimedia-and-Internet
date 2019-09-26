@@ -1,0 +1,35 @@
+.container {
+    display: grid;
+    grid-gap: 10px;
+    
+    padding: 10px;
+    grid-template-columns: 200px 400px;
+    grid-template-rows: 200px 400px;
+    grid-template-areas: 
+    "item1 item2"
+    "item3 item4";
+
+  }
+
+.grid-item{
+    background-color: tomato;
+    text-align: center;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.item1{
+    grid-area: item1
+}
+
+.item2{
+    grid-area: item2
+}
+
+.item3{
+    grid-area:item3
+}
+
+.item4{
+    grid-area:  item4;
+}

@@ -1,0 +1,228 @@
+﻿body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0 0 20vh 0;
+    padding: 0;
+    background-color: #222;
+    color:white;
+}
+
+a{
+    color:white;
+}
+
+.aboutme, .project, footer{
+    margin-top:60px;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+nav li {
+    float: left;
+}
+
+    nav li a {
+        display: block;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+        /* Change the link color to #111 (black) on hover */
+        nav li a:hover {
+            background-color: #111;
+        }
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    .header-container {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        background-repeat: no-repeat;
+        background-image: url('img/IMG_3789-min.jpg');
+        background-size: cover;
+        background-position: initial;
+        height: 100vh
+    }
+
+    .header-item {
+        margin-left: 30px;
+        color: white;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        font-size: 400%;
+        font:bold;
+    }
+
+    main, footer {
+        padding-left: 10px;
+    }
+
+    footer {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "footertitle" 
+            "contactbox"
+            "map";
+    }
+    .footertitle {
+        grid-area: footertitle
+    }
+    .contactbox {
+        grid-area: contactbox;
+        display: flex;
+        flex-direction: column;
+    }
+    .map {
+        grid-area: map;
+        align-self:center;
+    }
+
+    footer iframe{
+        width:500px;
+        height:375px;
+    }
+
+
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+    body{
+        display:flex;
+        align-content:center;
+        flex-direction:column;
+        text-align:center;
+    }
+
+    main, footer {
+        padding-left: 0;
+    }
+
+    .header-container {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        background-repeat: no-repeat;
+        background-image: url('img/IMG_2162-min.jpg');
+        background-size: cover;
+        background-position: initial;
+        height: 100vh
+    }
+
+    .header-item {
+        margin-left: 30px;
+        color: white;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        font-size: 400%;
+    }
+
+    footer iframe {
+        width: 90%;
+        height: 600px;
+    }
+}
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    body{
+        text-align:initial;
+        font-size:larger;
+    }
+
+    main, footer {
+        padding-left: 30px;
+    }
+
+    .header-container {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content:center;
+        background-repeat: no-repeat;
+        background-image: url('img/IMG_4109-min.jpg');
+        background-size:cover;
+        background-position:initial;
+        height:100vh
+    }
+
+    .header-item {
+        margin-left: 30px;
+        color: white;
+        /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
+        font-size: 400%;
+    }
+
+    .project {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: 
+            "project project"
+            "teaser parody"
+            "pageflipper snake";
+        grid-row-gap:2em;
+    }
+
+
+    .project {
+        grid-area: project;
+    }
+
+    .teaser {
+        grid-area: teaser;
+    }
+
+    .parody {
+        grid-area: parody
+    }
+
+    .pageflipper {
+        grid-area: pageflipper
+    }
+
+    .snake {
+        grid-area: snake
+    }
+
+    footer{
+        display:grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+            "footertitle footertitle"
+            "contactbox map";
+    }
+    .contactbox {
+        grid-area: contactbox;
+        display: flex;
+        flex-direction: column;
+    }
+    .map{
+        grid-area:map;
+    }
+    .footertitle{
+        grid-area:footertitle
+    }
+
+    footer iframe {
+        width: 800px;
+        height: 600px;
+    }
+}
