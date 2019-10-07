@@ -106,28 +106,43 @@ function findMessage(message){
 //End of 6.
 
 //7
-let arr1=[3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
-mostFrequent(arr1)
+// let arr1=[3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
+// mostFrequent(arr1)
 
-function mostFrequent(arr1){
-    let mf = 1;
-    let m = 0;
-    let item;
-    for (let i=0; i<arr1.length; i++)
-    {
-            for (let j=i; j<arr1.length; j++)
-            {
-                    if (arr1[i] == arr1[j])
-                    m++;
-                    if (mf<m)
-                    {
-                    mf=m; 
-                    item = arr1[i];
-                    }
-            }
-            m=0;
+// function mostFrequent(arr1){
+//     let mf = 1;
+//     let m = 0;
+//     let item;
+//     for (let i=0; i<arr1.length; i++)
+//     {
+//             for (let j=i; j<arr1.length; j++)
+//             {
+//                     if (arr1[i] == arr1[j])
+//                     m++;
+//                     if (mf<m)
+//                     {
+//                     mf=m; 
+//                     item = arr1[i];
+//                     }
+//             }
+//             m=0;
+//     }
+//     alert(item+" ( " +mf +" times ) ") ;
+// }
+// End of 7
+
+//8
+let array = [1,2,3,1,3]
+nonUniqueElements(array)
+
+function nonUniqueElements(array){
+    let count = 0;
+    for(let i = 0; i< array.length; i++){
+        for(let j=0; j<array.length; j++){
+            if(array[i] == array[j])
+            
+        }
     }
-    console.log(item+" ( " +mf +" times ) ") ;
 }
 
 
