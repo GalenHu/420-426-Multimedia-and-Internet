@@ -1,3 +1,5 @@
+import { isNullOrUndefined } from "util";
+
 //1.
 /*
 function multiplyTwoNumbers( numA,  numB)
@@ -132,18 +134,55 @@ function findMessage(message){
 // End of 7
 
 //8
-let array = [1,2,3,1,3]
-nonUniqueElements(array)
+// let array = [1,1,1,1,1,12]
+// nonUniqueElements(array)
 
-function nonUniqueElements(array){
-    let count = 0;
-    for(let i = 0; i< array.length; i++){
-        for(let j=0; j<array.length; j++){
-            if(array[i] == array[j])
+// function nonUniqueElements(array){
+//     let count = 0;
+//     let frequentNumber = []
+//     for(let i = 0; i< array.length; i++){
+//         for(let j=0; j<array.length; j++){
+//             if(array[i] == array[j])
+//                 count++;
+//             if(count > 1){
+//                 frequentNumber.push(`${array[i]}`)
+//                 break;
+//             }
             
+//         }
+//         count = 0;
+//     }
+//     alert(frequentNumber)
+// }
+//End of 8.
+
+//9.
+let grid = [5]
+//row = col
+grid[0] = [1,0,0,1,0]
+grid[1] = [0,1,0,0,0]
+grid[2] = [0,0,1,0,1]
+grid[3] = [1,0,0,0,0]
+grid[4] = [0,0,1,0,0]
+
+let row = 2
+let col = 1
+
+countNeighbours(grid, row, col)
+
+function countNeighbours(grid, row, col){
+    let count = 0;
+
+    for(let i = -1; i < 2; i++){
+        for(let j = -1; j < 2; j++){
+
+            if(grid[row+i][col+j] == 1 && grid[row][col] != 1)
+            {
+                count++;
+            }
+                
         }
     }
+    console.log(count);
+    
 }
-
-
-
