@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Exercise 6.1</title>
+</head>
+<body>
+    <h1>Mountain Info</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Height</th>
+                <th>Range</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody id="mountain-data"></tbody>
+    </table>
+    
+    <label for="height-filter">
+        Only show mountains that are larger than
+        <input type="number" id="height-filter">
+        meters tall.
+    </label>
+    
+    <button onclick="calculate()">Submit</button>
+    
+    <h2>The tallest mountains is: </h2>
+    <h2>The shortest mountains is: </h2>
+    <h2>The average height of all the mountains is: </h2>
+
+    <script src="main.js"></script>
+</body>
+</html>
