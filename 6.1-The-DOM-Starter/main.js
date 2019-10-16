@@ -17,4 +17,9 @@ const mountains = [
 
 function calculate() {
     // This function will fire when the button in the HTML is clicked.
+    let myTable = document.
+    for(let i = 0; i< mountains.length;i++){
+        
+    }
+
 }
