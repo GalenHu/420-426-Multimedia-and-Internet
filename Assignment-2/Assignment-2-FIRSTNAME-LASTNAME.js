@@ -55,7 +55,6 @@ function  safePawns(pawnPosition){
     for(let i = 0; i<nbPawn; i++)
     {
         let workingPawn = pawnPosition[i]
-
         for(let j = 0 ; j<nbPawn;j++)
         {
             //if pawn have pawn on each side column
@@ -63,9 +62,7 @@ function  safePawns(pawnPosition){
                 count++
                 break;
             }
-                
         }
     }
-
     console.log(count);
 }
