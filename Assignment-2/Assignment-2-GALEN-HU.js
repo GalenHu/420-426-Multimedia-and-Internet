@@ -45,24 +45,41 @@
 
 //2.
 
-let pawnPosition = ["b4", "d4", "f4", "c3", "e3", "g5", "d2"];
+// let pawnPosition = ["b4", "d4", "f4", "c3", "e3", "g5", "d2"];
 
-safePawns(pawnPosition)
+// safePawns(pawnPosition)
 
-function  safePawns(pawnPosition){
-    let nbPawn = pawnPosition.length;
-    let count=0;
-    for(let i = 0; i<nbPawn; i++)
-    {
-        let workingPawn = pawnPosition[i]
-        for(let j = 0 ; j<nbPawn;j++)
-        {
-            //if pawn have pawn on each side column
-            if((workingPawn[0].charCodeAt(0)-1 == pawnPosition[j][0].charCodeAt(0) || workingPawn[0].charCodeAt(0)+1 == pawnPosition[j][0].charCodeAt(0)) && (workingPawn[1] - 1 == pawnPosition[j][1])){
-                count++
-                break;
-            }
-        }
+// function  safePawns(pawnPosition){
+//     let nbPawn = pawnPosition.length;
+//     let count=0;
+//     for(let i = 0; i<nbPawn; i++)
+//     {
+//         let workingPawn = pawnPosition[i]
+//         for(let j = 0 ; j<nbPawn;j++)
+//         {
+//             //if pawn have pawn on each side column
+//             if((workingPawn[0].charCodeAt(0)-1 == pawnPosition[j][0].charCodeAt(0) || workingPawn[0].charCodeAt(0)+1 == pawnPosition[j][0].charCodeAt(0)) && (workingPawn[1] - 1 == pawnPosition[j][1])){
+//                 count++
+//                 break;
+//             }
+//         }
+//     }
+//     console.log(count);
+// }
+
+//3
+
+let rectangle = [
+    [6,3,8,10],
+    [4,8,11,10],
+    [16,8,19,11]
+]
+
+rectanglesUnion(rectangle)
+
+function rectanglesUnion(rectangle){
+    let nbOfRect = rectangle.length;
+    for(let i = 0; i<nbOfRect; i++){
+        rectangle[i][3] - rectangle[i][1]
     }
-    console.log(count);
 }
