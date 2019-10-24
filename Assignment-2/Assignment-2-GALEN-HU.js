@@ -69,17 +69,103 @@
 
 //3
 
+//Limitation: No more than 2 rectangle may intersect at any given location
+//Goal #0 Find if two rectabgles intersect... 
+//  Check for left and right edges top and bottom being greater thannn or less than one another
+//draw diagram rectangle intersecting and those that are not intersecting
+//Goeal #1 Find where two rectangles intersect
 let rectangle = [
     [6,3,8,10],
-    [4,8,11,10],
-    [16,8,19,11]
+    [4,8,11,10]
+    
 ]
 
 rectanglesUnion(rectangle)
 
 function rectanglesUnion(rectangle){
     let nbOfRect = rectangle.length;
-    for(let i = 0; i<nbOfRect; i++){
-        rectangle[i][3] - rectangle[i][1]
+    let intersect1 = [];
+    let intersect2 = [];
+    let intersect3 = [];
+
+    for(let i = 0; i<nbOfRect; i++){        //i = working rectangle
+        for(let j = 0; j<nbOfRect; j++){    //j = comparing rectangle
+            if(i != j){                     //dont compare with self
+                if(rectangle[i][0]>= rectangle[j][0]){      //is i(x1) bigger than j(x1) 
+                    intersect1.push(rectangle[i][0]);
+                    intersect3.push(rectangle[i][0])
+                    console.log(`left vertical of rectangle ${i} is inside of rectangle ${j}`)
+                    if(rectangle[i][2] <= rectangle[j][2])
+                    {
+                        intersect3.push(rectangle[i][2])
+                        console.log(`right vertical of rectangle ${i} is inside of rectangle ${j}`)
+                    }
+                    else if(rectangle[i][2] >= rectangle[j][2])
+                    {
+                        intersect3.push(rectangle[j][2])
+                        console.log(`right vertical of rectangle ${j} is inside of rectangle ${i}`)
+                    }
+                }
+                else if(rectangle[i][2] <= rectangle[j][2]){
+                    intersect1.push(rectangle[i][2]);
+                    console.log(`right vertical of rectangle ${i} is inside of rectangle ${j}`)
+                    if(rectangle[i][0] <= rectangle[j][0])
+                    {
+                        intersect3.push(rectangle[i][0])
+                        console.log(`left vertical of rectangle ${i} is inside of rectangle ${j}`)
+                    }
+                    else if(rectangle[i][0] >= rectangle[j][0])
+                    {
+                        intersect3.push(rectangle[j][0])
+                        console.log(`left vertical of rectangle ${j} is inside of rectangle ${i}`)
+                    }
+                }                
+                if(rectangle[i][1] >= rectangle[j][1]){
+                    intersect1.push(rectangle[i][1]);
+                    intersect3.push(rectangle[i][1]);
+                    console.log(`top horizontal of rectangle ${i} is inside of rectangle ${j}`)
+                    if(rectangle[i][3] <= rectangle[j][3]){
+                        intersect3.push(rectangle[i][3])
+                        console.log(`bottom horizontal of rectangle ${i} is inside of rectangle ${j}`)
+                    }
+                    else if(rectangle[i][3] <= rectangle[j][3]){
+                        intersect3.push(rectangle[j][3])
+                        console.log(`bottom horizontal of rectangle ${j} is inside of rectangle ${i}`)
+                    }
+                }
+                else if(rectangle[i][3] <= rectangle[j][3]){
+                    intersect1.push(rectangle[i][3]);
+                    intersect3.push(rectangle[i][3])
+                    console.log(`bottom horizontal of rectangle ${i} is inside of rectangle ${j}`)
+                    if(rectangle[i][1] >= rectangle[j][1]){
+                        intersect3.push(rectangle[i][1])
+                        console.log(`top horizontal of rectangle ${i} is inside of rectangle ${j}`)
+                    }
+                    else if(rectangle[i][1] <= rectangle[j][1]){
+                        intersect3.push(rectangle[j][1])
+                        console.log(`top horizontal of rectangle ${j} is inside of rectangle ${i}`)
+                    }
+                }
+
+            }
+        }
+        console.log("");
+        intersect2.push(intersect3)
+        intersect1 = [];
+        intersect3=[];
+    } 
+    console.log(intersect2)
+    let horizontal
+    let vertical
+    for(let i = 0; i<intersect2.length; i++){
+        console.log(intersect2[i].length)
+        if(intersect2.length == 4){
+            horizontal = Math.abs(intersect2[0] - intersect2[1])
+            vertical = Math.abs(intersect2[2] - intersect2[3])
+        }
     }
+    let area = horizontal * vertical
+    console.log(area)
 }
+
+//Imcomplete
