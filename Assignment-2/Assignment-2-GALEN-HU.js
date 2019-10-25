@@ -76,8 +76,9 @@
 //Goeal #1 Find where two rectangles intersect
 let rectangle = [
     [6,3,8,10],
-    [4,8,11,10]
-    
+    [4,8,11,10],
+    [16, 8, 19, 11],
+    [16, 8, 19, 11]
 ]
 
 rectanglesUnion(rectangle)
@@ -146,26 +147,44 @@ function rectanglesUnion(rectangle){
                         console.log(`top horizontal of rectangle ${j} is inside of rectangle ${i}`)
                     }
                 }
-
+                console.log("");
+                intersect2.push(intersect3)
+                intersect1 = [];
+                intersect3=[];
             }
+
         }
-        console.log("");
-        intersect2.push(intersect3)
-        intersect1 = [];
-        intersect3=[];
+
     } 
     console.log(intersect2)
     let horizontal
     let vertical
+    let intersectedArea = 0
+    let intersect4 = []
     for(let i = 0; i<intersect2.length; i++){
         console.log(intersect2[i].length)
-        if(intersect2.length == 4){
-            horizontal = Math.abs(intersect2[0] - intersect2[1])
-            vertical = Math.abs(intersect2[2] - intersect2[3])
+        if(intersect2[i].length == 4){
+            intersect4.push(intersect2[i])
+            horizontal = Math.abs(intersect2[i][0] -intersect2[i][1])
+            vertical = Math.abs(intersect2[i][2] - intersect2[i][3])
+            intersectedArea = intersectedArea + (horizontal*vertical)
+
         }
     }
-    let area = horizontal * vertical
-    console.log(area)
+    console.log(intersect4)
+    for(let i = 0; i<intersect4.length; i++){
+        
+    }
+    
+    console.log(intersectedArea)
+    let singleRectangle = 0;
+    let totalArea = 0
+    for(let i = 0; i< nbOfRect; i++){
+        singleRectangle = Math.abs((rectangle[i][3] - rectangle[i][1])*(rectangle[i][2]-rectangle[i][0]))
+        totalArea = totalArea+singleRectangle;
+        singleRectangle = 0;
+    }
+    totalArea = totalArea - intersectedArea
+    console.log(totalArea);
 }
 
-//Imcomplete
