@@ -161,20 +161,42 @@ function rectanglesUnion(rectangle){
     let vertical
     let intersectedArea = 0
     let intersect4 = []
+    //Keep potential intersect
     for(let i = 0; i<intersect2.length; i++){
         console.log(intersect2[i].length)
         if(intersect2[i].length == 4){
             intersect4.push(intersect2[i])
-            horizontal = Math.abs(intersect2[i][0] -intersect2[i][1])
-            vertical = Math.abs(intersect2[i][2] - intersect2[i][3])
-            intersectedArea = intersectedArea + (horizontal*vertical)
 
         }
     }
+
     console.log(intersect4)
+    //Remove duplicate
+    // intersect4 = new Set(intersect4)
+    // console.log(intersect4)
+// let duplicate
+//     for (let i=0; i<intersect4.length; i++){
+//         for(let j=0; j<intersect4.length; j++){
+//             if(intersect4[i] == intersect4[j] && i!= j){
+//                 duplicate = intersect4.indexOf(intersect4[i])
+//                 intersect4.splice(duplicate)
+//             }
+//         }
+//     }
+
+console.log(removeDuplicates(intersect4))
+    console.log(intersect4)
+
     for(let i = 0; i<intersect4.length; i++){
+
+        horizontal = Math.abs(intersect4[i][0] -intersect4[i][1])
+        vertical = Math.abs(intersect4[i][2] - intersect4[i][3])
+        intersectedArea = intersectedArea + (horizontal*vertical)
         
+
     }
+
+
     
     console.log(intersectedArea)
     let singleRectangle = 0;
@@ -186,5 +208,15 @@ function rectanglesUnion(rectangle){
     }
     totalArea = totalArea - intersectedArea
     console.log(totalArea);
+
+    function removeDuplicates(arr){
+        let unique_array = []
+        for(let i = 0;i < arr.length; i++){
+            if(unique_array.indexOf(arr[i]) == -1){
+                unique_array.push(arr[i])
+            }
+        }
+        return unique_array
+    }
 }
 
