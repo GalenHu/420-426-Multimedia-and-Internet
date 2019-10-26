@@ -74,174 +74,125 @@
 //  Check for left and right edges top and bottom being greater thannn or less than one another
 //draw diagram rectangle intersecting and those that are not intersecting
 //Goeal #1 Find where two rectangles intersect
-let rectangle = [
-    [6, 3, 8, 10],
-    [4, 8, 11, 10],
-    [16, 8, 19, 11],
-    [16, 8, 19, 19]
-]
 
-rectanglesUnion(rectangle)
+// let rectangle = [
+//     [6, 3, 8, 10],
+//     [4, 8, 11, 10],
+//     [16, 8, 19, 11],
+//     [16, 8, 19, 11]
+// ]
 
-function rectanglesUnion(rectangle) {
-    let nbOfRect = rectangle.length;
-    let intersect1 = [];
-    let intersect2 = [];
-    let intersect3 = [];
+// rectanglesUnion(rectangle)
 
-    for (let i = 0; i < nbOfRect; i++) {        //i = working rectangle
-        for (let j = 0; j < nbOfRect; j++) {    //j = comparing rectangle
-            if (i != j) {                     //dont compare with self
-                if (rectangle[i][0] >= rectangle[j][0]) {      //is i(x1) bigger than j(x1) 
-                    intersect1.push(rectangle[i][0]);
-                    intersect3.push(rectangle[i][0])
-                    console.log(`left vertical of rectangle ${i} is inside of rectangle ${j}`)
-                    if (rectangle[i][2] <= rectangle[j][2]) {
-                        intersect3.push(rectangle[i][2])
-                        console.log(`right vertical of rectangle ${i} is inside of rectangle ${j}`)
-                    }
-                    else if (rectangle[i][2] >= rectangle[j][2]) {
-                        intersect3.push(rectangle[j][2])
-                        console.log(`right vertical of rectangle ${j} is inside of rectangle ${i}`)
-                    }
-                }
-                else if (rectangle[i][2] <= rectangle[j][2]) {
-                    intersect1.push(rectangle[i][2]);
-                    console.log(`right vertical of rectangle ${i} is inside of rectangle ${j}`)
-                    if (rectangle[i][0] <= rectangle[j][0]) {
-                        intersect3.push(rectangle[i][0])
-                        console.log(`left vertical of rectangle ${i} is inside of rectangle ${j}`)
-                    }
-                    else if (rectangle[i][0] >= rectangle[j][0]) {
-                        intersect3.push(rectangle[j][0])
-                        console.log(`left vertical of rectangle ${j} is inside of rectangle ${i}`)
-                    }
-                }
-                if (rectangle[i][1] >= rectangle[j][1]) {
-                    intersect1.push(rectangle[i][1]);
-                    intersect3.push(rectangle[i][1]);
-                    console.log(`top horizontal of rectangle ${i} is inside of rectangle ${j}`)
-                    if (rectangle[i][3] <= rectangle[j][3]) {
-                        intersect3.push(rectangle[i][3])
-                        console.log(`bottom horizontal of rectangle ${i} is inside of rectangle ${j}`)
-                    }
-                    else if (rectangle[i][3] <= rectangle[j][3]) {
-                        intersect3.push(rectangle[j][3])
-                        console.log(`bottom horizontal of rectangle ${j} is inside of rectangle ${i}`)
-                    }
-                }
-                else if (rectangle[i][3] <= rectangle[j][3]) {
-                    intersect1.push(rectangle[i][3]);
-                    intersect3.push(rectangle[i][3])
-                    console.log(`bottom horizontal of rectangle ${i} is inside of rectangle ${j}`)
-                    if (rectangle[i][1] >= rectangle[j][1]) {
-                        intersect3.push(rectangle[i][1])
-                        console.log(`top horizontal of rectangle ${i} is inside of rectangle ${j}`)
-                    }
-                    else if (rectangle[i][1] <= rectangle[j][1]) {
-                        intersect3.push(rectangle[j][1])
-                        console.log(`top horizontal of rectangle ${j} is inside of rectangle ${i}`)
-                    }
-                }
-                console.log("");
-                intersect2.push(intersect3)
-                intersect1 = [];
-                intersect3 = [];
-            }
+// function rectanglesUnion(rectangle) {
+//     let nbOfRect = rectangle.length;
+//     let arrayOfPolygon = [];
+//     let arrayOfPoint = [];
 
-        }
+//     for (let i = 0; i < nbOfRect; i++) {        //i = working rectangle
+//         for (let j = 0; j < nbOfRect; j++) {    //j = comparing rectangle
+//             if (i != j) {                     //dont compare with self
+//                 //is i(x1) bigger than j(x1) aka left vertical of rectangle ${i} is inside of rectangle ${j}`
+//                 if (rectangle[i][0] >= rectangle[j][0]) {      
+//                     arrayOfPoint.push(rectangle[i][0])
+//                         //`right vertical of rectangle ${i} is inside of rectangle ${j}`
+//                     if (rectangle[i][2] <= rectangle[j][2]) {
+//                         arrayOfPoint.push(rectangle[i][2])
+//                     }
+//                     //`right vertical of rectangle ${j} is inside of rectangle ${i}`
+//                     else if (rectangle[i][2] >= rectangle[j][2]) {
+//                         arrayOfPoint.push(rectangle[j][2])
+                        
+//                     }
+//                 }
+//                 //`right vertical of rectangle ${i} is inside of rectangle ${j}`)
+//                 else if (rectangle[i][2] <= rectangle[j][2]) {
+//                     //`left vertical of rectangle ${i} is inside of rectangle ${j}`)
+//                     if (rectangle[i][0] <= rectangle[j][0]) {
+//                         arrayOfPoint.push(rectangle[i][0])
+//                     }
+//                     //`left vertical of rectangle ${j} is inside of rectangle ${i}`)
+//                     else if (rectangle[i][0] >= rectangle[j][0]) {
+//                         arrayOfPoint.push(rectangle[j][0])
+//                     }
+//                 }
+//                 //`top horizontal of rectangle ${i} is inside of rectangle ${j}`)
+//                 if (rectangle[i][1] >= rectangle[j][1]) {
+//                     arrayOfPoint.push(rectangle[i][1]);
+//                     //(`bottom horizontal of rectangle ${i} is inside of rectangle ${j}`)
+//                     if (rectangle[i][3] <= rectangle[j][3]) {
+//                         arrayOfPoint.push(rectangle[i][3])
+//                     }
+//                     //bottom horizontal of rectangle ${j} is inside of rectangle ${i}`)
+//                     else if (rectangle[i][3] <= rectangle[j][3]) {
+//                         arrayOfPoint.push(rectangle[j][3])
+//                     }
+//                 }
+//                 //bottom horizontal of rectangle ${i} is inside of rectangle ${j}`)
+//                 else if (rectangle[i][3] <= rectangle[j][3]) {
+//                     arrayOfPoint.push(rectangle[i][3])
+//                     //top horizontal of rectangle ${i} is inside of rectangle ${j}`)
+//                     if (rectangle[i][1] >= rectangle[j][1]) {
+//                         arrayOfPoint.push(rectangle[i][1])
+//                     }
+//                     //top horizontal of rectangle ${j} is inside of rectangle ${i}`)
+//                     else if (rectangle[i][1] <= rectangle[j][1]) {
+//                         arrayOfPoint.push(rectangle[j][1])
+//                     }
+//                 }
+//                 arrayOfPolygon.push(arrayOfPoint)
+//                 arrayOfPoint = [];
+//             }
 
-    }
-    console.log(intersect2)
-    let horizontal
-    let vertical
-    let intersectedArea = 0
-    let intersect4 = []
-    //Keep potential intersect
-<<<<<<< HEAD
-    for(let i = 0; i<intersect2.length; i++){
-=======
-    for (let i = 0; i < intersect2.length; i++) {
->>>>>>> master
-        console.log(intersect2[i].length)
-        if (intersect2[i].length == 4) {
-            intersect4.push(intersect2[i])
+//         }
 
-        }
-    }
+//     }
+//     let horizontal
+//     let vertical
+//     let intersectedArea = 0
+//     let potentialIntersect = []
+//     //Keep potential intersect
+//     for (let i = 0; i < arrayOfPolygon.length; i++) {
+//         if (arrayOfPolygon[i].length == 4) {
+//             potentialIntersect.push(arrayOfPolygon[i])
 
-    console.log(intersect4)
-    //Remove duplicate
-    // intersect4 = new Set(intersect4)
-<<<<<<< HEAD
-    // console.log(intersect4)
-// let duplicate
-//     for (let i=0; i<intersect4.length; i++){
-//         for(let j=0; j<intersect4.length; j++){
-//             if(intersect4[i] == intersect4[j] && i!= j){
-//                 duplicate = intersect4.indexOf(intersect4[i])
-//                 intersect4.splice(duplicate)
+//         }
+//     }
+
+//     //Remove duplicate
+//     let duplicate
+//     for (let i = 0; i < potentialIntersect.length; i++) {
+//         for (let j = 0; j < potentialIntersect.length; j++) {
+//             if (JSON.stringify(potentialIntersect[i]) == JSON.stringify(potentialIntersect[j]) && i != j) {
+//                 duplicate = potentialIntersect.indexOf(potentialIntersect[j])
+//                 potentialIntersect.splice(duplicate, 1)
 //             }
 //         }
 //     }
 
-console.log(removeDuplicates(intersect4))
-    console.log(intersect4)
+//     //Calculate the area of intersected area
+//     for (let i = 0; i < potentialIntersect.length; i++) {
 
-    for(let i = 0; i<intersect4.length; i++){
-
-        horizontal = Math.abs(intersect4[i][0] -intersect4[i][1])
-        vertical = Math.abs(intersect4[i][2] - intersect4[i][3])
-        intersectedArea = intersectedArea + (horizontal*vertical)
-        
-
-    }
+//         horizontal = Math.abs(potentialIntersect[i][0] - potentialIntersect[i][1])
+//         vertical = Math.abs(potentialIntersect[i][2] - potentialIntersect[i][3])
+//         intersectedArea = intersectedArea + (horizontal * vertical)
 
 
-    
-=======
-    console.log(intersect4)
-    let duplicate
-    for (let i = 0; i < intersect4.length; i++) {
-        for (let j = 0; j < intersect4.length; j++) {
-            if (JSON.stringify(intersect4[i]) == JSON.stringify(intersect4[j]) && i != j) {
-                duplicate = intersect4.indexOf(intersect4[j])
-                intersect4.splice(duplicate, 1)
-            }
-        }
-    }
+//     }
 
-    console.log(intersect4)
+//     //Calculate the total area
+//     let singleRectangle = 0;
+//     let totalArea = 0
+//     for (let i = 0; i < nbOfRect; i++) {
+//         singleRectangle = Math.abs((rectangle[i][3] - rectangle[i][1]) * (rectangle[i][2] - rectangle[i][0]))
+//         totalArea = totalArea + singleRectangle;
+//         singleRectangle = 0;
+//     }
+//     totalArea = totalArea - intersectedArea
+//     console.log(totalArea);
 
-    for (let i = 0; i < intersect4.length; i++) {
+// }
 
-        horizontal = Math.abs(intersect4[i][0] - intersect4[i][1])
-        vertical = Math.abs(intersect4[i][2] - intersect4[i][3])
-        intersectedArea = intersectedArea + (horizontal * vertical)
+//End of No3
 
-
-    }
-
->>>>>>> master
-    console.log(intersectedArea)
-    let singleRectangle = 0;
-    let totalArea = 0
-    for (let i = 0; i < nbOfRect; i++) {
-        singleRectangle = Math.abs((rectangle[i][3] - rectangle[i][1]) * (rectangle[i][2] - rectangle[i][0]))
-        totalArea = totalArea + singleRectangle;
-        singleRectangle = 0;
-    }
-    totalArea = totalArea - intersectedArea
-    console.log(totalArea);
-
-    function removeDuplicates(arr){
-        let unique_array = []
-        for(let i = 0;i < arr.length; i++){
-            if(unique_array.indexOf(arr[i]) == -1){
-                unique_array.push(arr[i])
-            }
-        }
-        return unique_array
-    }
-}
-
+//No4
