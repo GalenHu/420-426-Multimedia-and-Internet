@@ -196,3 +196,53 @@
 //End of No3
 
 //No4
+//[distance,speedLimit]
+let rail = [[5,5],[4,2]];   //(1,2,2,2,1,1)
+let ezRail = [9,3]
+fastTrain(ezRail)
+
+function fastTrain(rail){
+    const distanceIndex = 0
+    const speedIndex = 1
+
+    let distance;
+    let time = 0;
+    let startSpeed = 0
+    let speed = startSpeed
+    let topSpeedReach = false;
+    let speedLimit;
+    let endSpeed
+    let theoricalSpeedLimit
+    let traveledDis = 0;
+
+    for(let i = 0; i<rail.length; i++){
+        distance = rail[i][distanceIndex];
+        speedLimit = rail[i][speedIndex];
+        console.log(`distance: ${distance}, speedLimit: ${speedLimit}`)
+        if(i+1 == rail.length)
+            endSpeed = 1;
+        else
+            endSpeed = rail[i+1][speedIndex];
+        
+        console.log(`startSpeed: ${startSpeed}, speed: ${speed}, endSpeed: ${endSpeed}`)
+        theoricalSpeedLimit = Math.trunc(Math.sqrt(distance));
+        if(speed < theoricalSpeedLimit){
+            speed++
+            traveledDis = traveledDis + speed;
+            time++
+        }
+        else while(speed >= theoricalSpeedLimit || topSpeedReach){
+            topSpeedReach = true;
+            if(Math.sqrt(distance)%Math.sqrt(distance) == 0)
+            {
+                speed--
+            }
+            traveledDis = traveledDis + speed;
+            time++
+            if(traveledDis == distance)
+                break
+        }
+    }
+
+    console.log(time);
+}
