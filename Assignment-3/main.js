@@ -5,9 +5,9 @@ const rockets = "https://api.spacexdata.com/v3/rockets";
 
 
 fetch(url)
-    .then(response => response.json())
+    .then(response1 => response1.json())
     .then(data =>{
-        doStuff(data)
+        doStuff1(data)
     })
 
     .catch(function(error){
@@ -15,31 +15,34 @@ fetch(url)
         console.log(error);
     });
 
-function doStuff(data){
+function doStuff1(data){
     //If the request was succesfull then data will have everything you asked for.
     console.log(data)
 }
 
 fetch(nextLauch)
-    .then(response => response.json())
-    .then(data =>{
-        doStuff(data)
+    .then(response2 => response2.json())
+    .then(nLauch =>{
+        doStuff2(nLauch)
     })
 
     .catch(function(error){
         //If there is any error you will catch them here
         console.log(error);
     });
-
-function doStuff(data){
+function doStuff2(nLauch){
     //If the request was succesfull then data will have everything you asked for.
-    console.log(data)
+    console.log(nLauch)
+
+    let next = document.getElementById("next");
+
+    next.innerHTML = nLauch.mission_name;
 }
 
 fetch(pastLauch)
-    .then(response => response.json())
-    .then(data =>{
-        doStuff(data)
+    .then(response3 => response3.json())
+    .then(pLauch =>{
+        doStuff3(pLauch)
     })
 
     .catch(function(error){
@@ -47,24 +50,28 @@ fetch(pastLauch)
         console.log(error);
     });
 
-function doStuff(data){
+function doStuff3(pLauch){
     //If the request was succesfull then data will have everything you asked for.
-    console.log(data)
+    console.log(pLauch)
+
+    let past = document.getElementById("past");
+    past.innerHTML = pLauch[0].flight_number
 }
 
 
-fetch(rockets)
-    .then(response => response.json())
-    .then(data =>{
-        doStuff(data)
-    })
+// fetch(rockets)
+//     .then(response4 => response4.json())
+//     .then(rocket =>{
+//         doStuff4(rocket)
+//     })
 
-    .catch(function(error){
-        //If there is any error you will catch them here
-        console.log(error);
-    });
+//     .catch(function(error){
+//         //If there is any error you will catch them here
+//         console.log(error);
+//     });
 
-function doStuff(data){
-    //If the request was succesfull then data will have everything you asked for.
-    console.log(data)
-}
+// function doStuff4(rocket){
+//     //If the request was succesfull then data will have everything you asked for.
+//     console.log(rocket)
+// }
+
