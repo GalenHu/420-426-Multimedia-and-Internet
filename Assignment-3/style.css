@@ -8,6 +8,10 @@ h1{
     font-family: 'Courier New', Courier, monospace;
 }
 
-#background{
-    background-image: url(images/earth.jpg);
+header{
+		background-repeat: no-repeat;
+		background-image: url('images/earth.jpg');
+		background-size: cover;
+		background-position: initial;
+		height: 100vh
 }
