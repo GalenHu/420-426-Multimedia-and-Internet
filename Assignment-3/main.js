@@ -1,10 +1,12 @@
+M.AutoInit();
+
 const url = "https://api.spacexdata.com/v3/"; //The root of the SpaceX API
-const nextLauch = "https://api.spacexdata.com/v3/launches/next";
+
 const pastLauch = "https://api.spacexdata.com/v3/launches/past?limit=3";
 const rockets = "https://api.spacexdata.com/v3/rockets";
 
 //Header
-const infoLink = "https://api.spacexdata.com/v3/info";
+const infoLink = "https://api.spacexdata.com/v3/info";	//info
  fetch(infoLink)
 			.then(response => response.json())
 			.then(info =>{
@@ -20,29 +22,56 @@ const infoLink = "https://api.spacexdata.com/v3/info";
 			//If the request was succesfull then data will have everything you asked for.
 			console.log(info)
 			
-			document.getElementById("header_title").innerHTML = info.name
-			document.getElementById("header_summary").innerHTML = info.summary
-	}
+			document.getElementById("header_title").innerHTML = info.name;
+			document.getElementById("header_summary").innerHTML = info.summary;
+			document.getElementById("founder").innerHTML = info.founder;
+			document.getElementById("founded").innerHTML = info.founded;
+	};
 
+fetch("https://api.spacexdata.com/v3/launches/next") //next lauch
+    .then(response_next => response_next.json())
+    .then(next =>{
+        doStuff3(next)
+    })
 
-// fetch(pastLauch)
-//     .then(response3 => response3.json())
-//     .then(pLauch =>{
-//         doStuff3(pLauch)
-//     })
+    .catch(function(error){
+        //If there is any error you will catch them here
+        console.log(error);
+    });
 
-//     .catch(function(error){
-//         //If there is any error you will catch them here
-//         console.log(error);
-//     });
+function doStuff3(next){
+    //If the request was succesfull then data will have everything you asked for.
+    console.log(next)
 
-// function doStuff3(pLauch){
-//     //If the request was succesfull then data will have everything you asked for.
-//     console.log(pLauch)
+	let countDownDate = new Date(next.launch_date_utc).getTime();
 
-//     let past = document.getElementById("past");
-//     past.innerHTML = pLauch[0].flight_number
-// }
+	let x = setInterval(function() {
+
+		// Get today's date and time
+		let now = new Date().getTime();
+		  
+		// Find the distance between now and the count down date
+		let distance = countDownDate - now;
+		  
+		// Time calculations for days, hours, minutes and seconds
+		let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+		let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+		let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		  
+		// Output the result in an element with id="demo"
+		document.getElementById("next_launch_date_utc").innerHTML = days + "Day(s) " + hours + "Hour(s) "
+		+ minutes + "Minute(s) " + seconds + "Second(s) ";
+		  
+		// If the count down is over, write some text 
+		if (distance < 0) {
+		  clearInterval(x);
+		  document.getElementById("next_launch_date_utc").innerHTML = "EXPIRED";
+		}
+	  }, 1000);
+
+	// document.getElementById("next_launch_date_utc").innerHTML = next.launch_date_utc
+}
 
 
 // // fetch(rockets)

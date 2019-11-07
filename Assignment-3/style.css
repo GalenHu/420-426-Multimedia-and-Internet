@@ -1,17 +1,37 @@
-body{
+/* body{
     background-color: black;
-    color: white;
+	color: white;
+	font-family: "Euclid Square,Arial,sans-serif";
+	font-size: 1rem;
+	font-weight: 400;
+	text-align: left;
+	margin: 0;
 }
 
 h1{
-    font-size: 100px;
-    font-family: 'Courier New', Courier, monospace;
+	font-size: 4rem;
+	text-align: center;
 }
 
+p{
+	font-size: 1.125rem;
+	font-weight: 300;
+}
+
+main{
+	margin-top: 4rem
+} */
 header{
 		background-repeat: no-repeat;
-		background-image: url('images/earth.jpg');
+		background-image: url(images/1541789697177-DonutEarth.jpg);
 		background-size: cover;
 		background-position: initial;
-		height: 100vh
+		height: 90vh;
+		font-weight: 400;
+		color: white;
+		align-self: center;
+}
+
+.next_launch_date_utc{
+	font-size: 5rem;
 }
