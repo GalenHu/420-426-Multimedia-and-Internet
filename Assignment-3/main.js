@@ -2,7 +2,7 @@ M.AutoInit();
 
 const url = "https://api.spacexdata.com/v3/"; //The root of the SpaceX API
 
-const pastLauch = "https://api.spacexdata.com/v3/launches/past?limit=3";
+
 const rockets = "https://api.spacexdata.com/v3/rockets";
 
 //Header
@@ -22,12 +22,12 @@ const infoLink = "https://api.spacexdata.com/v3/info";	//info
 			//If the request was succesfull then data will have everything you asked for.
 			console.log(info)
 			
-			document.getElementById("header_title").innerHTML = info.name;
 			document.getElementById("header_summary").innerHTML = info.summary;
 			document.getElementById("founder").innerHTML = info.founder;
 			document.getElementById("founded").innerHTML = info.founded;
 	};
 
+	//Timer of next lauch
 fetch("https://api.spacexdata.com/v3/launches/next") //next lauch
     .then(response_next => response_next.json())
     .then(next =>{
@@ -69,24 +69,25 @@ function doStuff3(next){
 		  document.getElementById("next_launch_date_utc").innerHTML = "EXPIRED";
 		}
 	  }, 1000);
-
-	// document.getElementById("next_launch_date_utc").innerHTML = next.launch_date_utc
 }
 
+const pastLauch = "https://api.spacexdata.com/v3/launches/past?limit=3";
+fetch(pastLauch)
+			.then(pastResponse => pastResponse.json())
+			.then(past =>{
+					RequestInfo(past)
+			})
 
-// // fetch(rockets)
-// //     .then(response4 => response4.json())
-// //     .then(rocket =>{
-// //         doStuff4(rocket)
-// //     })
+			.catch(function(error){
+					//If there is any error you will catch them here
+					console.log(error);
+			});
 
-// //     .catch(function(error){
-// //         //If there is any error you will catch them here
-// //         console.log(error);
-// //     });
-
-// // function doStuff4(rocket){
-// //     //If the request was succesfull then data will have everything you asked for.
-// //     console.log(rocket)
-// // }
-
+	function RequestInfo(past){
+			//If the request was succesfull then data will have everything you asked for.
+			console.log(past)
+			
+			document.getElementById("header_summary").innerHTML = info.summary;
+			document.getElementById("founder").innerHTML = info.founder;
+			document.getElementById("founded").innerHTML = info.founded;
+	};
