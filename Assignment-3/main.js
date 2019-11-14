@@ -75,7 +75,7 @@ const pastLauch = "https://api.spacexdata.com/v3/launches/past?limit=3";
 fetch(pastLauch)
 			.then(pastResponse => pastResponse.json())
 			.then(past =>{
-					RequestInfo(past)
+					RequestPast(past)
 			})
 
 			.catch(function(error){
@@ -83,11 +83,11 @@ fetch(pastLauch)
 					console.log(error);
 			});
 
-	function RequestInfo(past){
+	function RequestPast(past){
 			//If the request was succesfull then data will have everything you asked for.
 			console.log(past)
 			
-			document.getElementById("header_summary").innerHTML = info.summary;
-			document.getElementById("founder").innerHTML = info.founder;
-			document.getElementById("founded").innerHTML = info.founded;
+			// document.getElementById("header_summary").innerHTML = info.summary;
+			// document.getElementById("founder").innerHTML = info.founder;
+			// document.getElementById("founded").innerHTML = info.founded;
 	};
