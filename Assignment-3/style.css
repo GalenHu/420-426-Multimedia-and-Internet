@@ -39,7 +39,3 @@ main{
 	padding: 3vw 2vw 2vw 2vw;
 	display: inline-block;
   }
-
-  .nav-wrapper{
-	@extend .white-text;
-  }

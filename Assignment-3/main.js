@@ -71,7 +71,7 @@ function doStuff3(next){
 	  }, 1000);
 }
 
-const pastLauch = "https://api.spacexdata.com/v3/launches/past?limit=3";
+const pastLauch = "https://api.spacexdata.com/v3/launches/past";
 fetch(pastLauch)
 			.then(pastResponse => pastResponse.json())
 			.then(past =>{
@@ -87,7 +87,20 @@ fetch(pastLauch)
 			//If the request was succesfull then data will have everything you asked for.
 			console.log(past)
 			
+
+
+			let pastTable = document.getElementById("pastTable");
+			let pastNumber = document.getElementById("pastInput");
+			pastTable.insertRow(pastNumber);
 			// document.getElementById("header_summary").innerHTML = info.summary;
 			// document.getElementById("founder").innerHTML = info.founder;
 			// document.getElementById("founded").innerHTML = info.founded;
 	};
+
+var input = document.getElementById("pastInput");
+input.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+   event.preventDefault();
+   alert("LMAO");
+  }
+});
