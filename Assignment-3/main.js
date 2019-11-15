@@ -86,21 +86,44 @@ fetch(pastLauch)
 	function RequestPast(past){
 			//If the request was succesfull then data will have everything you asked for.
 			console.log(past)
-			
-
+			var input = document.getElementById("pastInput");
+			input.addEventListener("keyup", function(event) {
+			if (event.keyCode === 13) {
+			event.preventDefault();
 
 			let pastTable = document.getElementById("pastTable");
 			let pastNumber = document.getElementById("pastInput");
-			pastTable.insertRow(pastNumber);
-			// document.getElementById("header_summary").innerHTML = info.summary;
-			// document.getElementById("founder").innerHTML = info.founder;
-			// document.getElementById("founded").innerHTML = info.founded;
+
+			for(let i =1; i< pastNumber; i++){
+				let tr = document.createElement('tr')
+
+			    let td1 = document.createElement('td');
+				let td2 = document.createElement('td');
+				let td3 = document.createElement('td');
+				let td4 = document.createElement('td');
+
+				let flightNumber = document.createTextNode(past.flight_number);
+				let lauchDate = document.createTextNode(past.lauch_date_unix);
+				let missionName = document.createTextNode(past.mission_name);
+				let detail = document.createTextNode(past.details);
+
+				td1.appendChild(flightNumber);
+				td2.appendChild(lauchDate);
+				td3.appendChild(missionName);
+				td4.appendChild(detail);
+				tr.appendChild(td1);
+				tr.appendChild(td2);
+				tr.appendChild(td3);
+				tr.appendChild(td4);
+
+				pastTable.appendChild(tr);
+			}
+			document.body.appendChild(pastTable);
+
+
+			}
+			});
+
 	};
 
-var input = document.getElementById("pastInput");
-input.addEventListener("keyup", function(event) {
-  if (event.keyCode === 13) {
-   event.preventDefault();
-   alert("LMAO");
-  }
-});
+

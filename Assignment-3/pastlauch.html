@@ -20,14 +20,14 @@
   </head>
 
   <body class="center">
-		<header class="card-panel black row">
-      <h1 class="col s12 offset-s1 m8 offset-m3 xl7 offset-xl4">
+    <header class="card-panel black row">
+      <h1 class="col s12 l8 offset-l4 xl7 offset-xl4">
         <div class="hub">
           <span style="color: white">Space</span>
           <span style="margin-left:-1rem">XXX</span>
         </div>
       </h1>
-		</header>
+    </header>
 
     <div class="container">
       <a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only">
@@ -46,23 +46,22 @@
     <main>
       <div class="container">
         <div class="row">
-          <div class="col s12 offset-s1 m8 offset-m2 xl7 offset-xl4">
+          <div class="col s12 l8 offset-l4 xl7 offset-xl4">
             <h1>Past Lauch</h1>
             <h2>How many lauches would you like to see?</h2>
-            <input style="color: white" id="pastInput"></input>
-            <table style="width: 130%">
+            <div class="input-field">
+              <input style="color: white" id="pastInput" type="text"></input>
+            </div>      
+            <table class="responsive-table">
               <thead>
                 <tr>
                   <th>Fligth Number</th>
                   <th>Lauch Date Unix</th>
                   <th>Mission Name</th>
-                  <th>Rocket Name</th>
-                  <th>Rocket Name</th>
                   <th>Detail</th>
-                  <th>Lauch Success</th>
                 </tr>
               </thead>
-              <tbody id="pastTable"></tbody>
+              <tbody id="pastTable" ></tbody>
             </table>
           </div>
         </div>
