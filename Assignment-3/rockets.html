@@ -30,7 +30,11 @@
     </h1>
   </header>
 
-
+  <div class="container">
+    <a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only">
+      <i class="material-icons">menu</i>
+    </a>
+  </div>
 
   <nav id="nav-mobile" class="sidenav sidenav-fixed" style="transform: translateX(-105%);">
     <li style="padding-bottom: 3rem;padding-top: 6rem;"><a href="index.html">SpaceX</a></li>
@@ -38,46 +42,56 @@
     <li><a href="pastlauch.html">Past Lauch</a></li>
     <li><a href="rockets.html">Rocket</a></li>
   </nav>
-  <div class="container">
-    <a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only">
-      <i class="material-icons">menu</i>
-    </a>
-  </div>
 
 
   <main>
     <div class="container">
       <div class="row">
         <div class="col s12 l8 offset-l4 xl7 offset-xl4">
-            <h1>About SpaceX</h1>
-            <p id="header_summary" class="col s6 offset-s3"></p>
-            <div class="row">
-                <div class="col s12 l6">
-                    <h2>Founder:</h2>
-                    <h5 id="founder"></h3>
-                </div>
-                <div class="col s12 l6">
-                    <h2>CEO:</h2>
-                    <h5 id="ceo"></h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 l6">
-                    <h2>Serving Earth Since:</h2>
-                    <h5 id="founded"></h3>
-                </div>
-                <div class="col s12 l6">
-                    <h2>Employees:</h2>
-                    <h5 id="employees"></h3>
-                </div>
-            </div>
+          <h1>Rocket List</h1>
+          <p>Rockets made by SpaceX</p>
+          <ul>
+                <li>
+                    <h2 id="name1"></h2>
+                    <p id="desc1"></p>
+                    <p id="flight1"></p>
+                    <p id="succ1"></p>
+                    <p id="cost1"></p>
+                    <a href="https://en.wikipedia.org/wiki/Falcon_1" id="wiki1"></a>
+                    
+                </li>
+                <li>
+                    <h2 id="name2"></h2>
+                    <p id="desc2"></p>
+                    <p id="flight2"></p>
+                    <p id="succ2"></p>
+                    <p id="cost2"></p>
+                    <a href="https://en.wikipedia.org/wiki/Falcon_9" id="wiki2"></a>
+                </li>
+                <li>
+                    <h2 id="name3"></h2>
+                    <p id="desc3"></p>
+                    <p id="flight3"></p>
+                    <p id="succ3"></p>
+                    <p id="cost3"></p>
+                    <a href="https://en.wikipedia.org/wiki/Falcon_Heavy" id="wiki3"></a>
+                </li>
+                <li>
+                    <h2 id="name4"></h2>
+                    <p id="desc4"></p>
+                    <p id="flight4"></p>
+                    <p id="succ4"></p>
+                    <p id="cost4"></p>
+                    <a href="https://en.wikipedia.org/wiki/SpaceX_Starship" id="wiki4"></a>
+                </li>
+          </ul>
         </div>
       </div>
     </div>
   </main>
-  
+
   <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
-<script src="main.js"></script>
+<script src="pastlauch.js"></script>
 
 </html>
