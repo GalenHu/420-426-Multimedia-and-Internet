@@ -1,6 +1,8 @@
 //this .js was create because for some reason, when i put this in main.js, it doesnt work
 /******************************* ROCKETS.HTML **************************************/
 
+M.AutoInit();
+
 const rocketLink = "https://api.spacexdata.com/v3/rockets";
 
 

@@ -70,7 +70,20 @@ function doStuff3(next) {
     }, 1000);
     //end of countdown
 
+    let timestamp = next.launch_date_unix;
+    date = new Date(timestamp * 1000),
+    datevalues = [
+    date.getFullYear(),
+    date.getMonth()+1,
+    date.getDate()
+    ];
+console.log(next.launch_site.site_name_long)
+    document.getElementById("date_next_lauch").innerHTML = (`${datevalues[0]}/${datevalues[1]}/${datevalues[2]}`);
+
     document.getElementById("mission_name").innerHTML = next.mission_name;
+
+    document.getElementById("lauch_location").innerHTML = next.launch_site.site_name_long;
+    
 }
 /******************************* END NEXT.HTML **************************************/
 
