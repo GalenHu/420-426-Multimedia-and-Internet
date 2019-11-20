@@ -1,23 +1,24 @@
 var canvas = document.getElementById("myCanvas");
-var context = c.getContext("2d");
+var context = canvas.getContext("2d");
 
 // context.beginPath();
 // context.arc(100, 75, 50, 0, 2 * Math.PI);
 // context.stroke();
 
+class Character {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
 
-class Character{
-    constructor(x,y){
-        this.x = x;
-        this.y = y;
-    }
-
-    drawChar(x,y){
-        context.beginPath();
-        context.arc(x, y, 50, 0, 2 * Math.PI);
-        context.stroke();
-    }
+  drawChar() {
+    console.log("asdf");
+    context.beginPath();
+    context.arc(this.x, this.y, 50, 0, 2 * Math.PI);
+    context.closePath();
+    context.stroke();
+  }
 }
 
-yo = new Character(100,75);
-yo.drawChar;
+yo = new Character(100, 75);
+yo.drawChar();
