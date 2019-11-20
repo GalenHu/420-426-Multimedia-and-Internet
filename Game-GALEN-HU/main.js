@@ -20,5 +20,5 @@ class Character {
   }
 }
 
-yo = new Character(100, 75);
+yo = new Character(300, 75);
 yo.drawChar();
