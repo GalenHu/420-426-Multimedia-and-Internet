@@ -5,12 +5,17 @@ class Character {
   radius = 5;
   xPosition;
   yPosition;
+  up;
+  down;
+  left;
+  right;
   constructor(x, y) {
     this.xPosition = x;
     this.yPosition = y;
   }
 
   drawChar() {
+    console.log("im a character");
     context.beginPath();
     context.arc(this.xPosition, this.yPosition, this.radius, 0, 2 * Math.PI);
     context.fillStyle = "red";
@@ -24,22 +29,22 @@ class Character {
   }
 
   arrowUp() {
-    this.yPosition -= 1;
+    this.yPosition = this.yPosition - 5;
     console.log("i am up");
   }
 
   arrowDown() {
-    this.yPosition += 1;
+    this.yPosition = this.yPosition + 10;;
     console.log("i am down");
   }
 
   arrowLeft() {
-    this.xPosition -= 1;
+    this.xPosition = this.xPosition - 10;
     console.log("i am left");
   }
 
   arrowRight() {
-    this.xPosition += 1;
+    this.xPosition = this.xPosition + 10;
     console.log("i am right");
   }
 }
@@ -53,8 +58,8 @@ function animate() {
   // Check which key was pressed and call the appropriate Car function.
   // document.onekeydown = checkKey;
   window.addEventListener("keydown", doKeyDown); //add false parameter?
-  // window.addEventListener("keyup", doKeyUp); //add false parameter?
-  //document.getElementById("myCanvas").onmousemove = findObjectCoords;
+  window.addEventListener("keyup", doKeyUp, false); //add false parameter?
+  document.getElementById("myCanvas").onmousemove = findObjectCoords;
   mychar.update();
 }
 
@@ -66,37 +71,43 @@ function doKeyDown(e) {
   console.log("test");
   if (e.keyCode == "38" || e.keyCode == "87") {
     // up arrow
+    mychar.up = true;
     mychar.arrowUp();
   } else if (e.keyCode == "40" || e.keyCode == "83") {
     // down arrow
+    mychar.down = true;
     mychar.arrowDown();
   } else if (e.keyCode == "37" || e.keyCode == "65") {
     // left arrow
+    mychar.left = true;
     mychar.arrowLeft();
   } else if (e.keyCode == "39" || e.keyCode == "68") {
     // right arrow
+    mychar.right = true;
     mychar.arrowRight();
   }
 }
 
-// function checkKey(e) {
-//   e = e || window.event;
-//   console.log("lol");
+function doKeyUp(e) {
+  if (e.keyCode == "38" || e.keyCode == "87") {
+    // up arrow
+    mychar.up = false;
+    mychar.arrowUp();
+  } else if (e.keyCode == "40" || e.keyCode == "83") {
+    // down arrow
+    mychar.down = false;
+    mychar.arrowDown();
+  } else if (e.keyCode == "37" || e.keyCode == "65") {
+    // left arrow
+    mychar.left = false;
+    mychar.arrowLeft();
+  } else if (e.keyCode == "39" || e.keyCode == "68") {
+    // right arrow
+    mychar.right = false;
+    mychar.arrowRight();
+  }
+}
 
-//   if (e.keyCode == "38" || e.keyCode == "87") {
-//     // up arrow
-//     mychar.arrowUp();
-//   } else if (e.keyCode == "40" || e.keyCode == "83") {
-//     // down arrow
-//     arrowDown();
-//   } else if (e.keyCode == "37" || e.keyCode == "65") {
-//     // left arrow
-//     arrowLeft();
-//   } else if (e.keyCode == "39" || e.keyCode == "68") {
-//     // right arrow
-//     arrowRight();
-//   }
-// }
 function findObjectCoords(mouseEvent) {
   var obj = document.getElementById("myCanvas");
   var obj_left = 0;
