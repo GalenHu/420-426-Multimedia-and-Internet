@@ -41,25 +41,6 @@ class Character {
     this.drawChar();
   }
 
-  // arrowUp() {
-  //   this.yPosition = this.yPosition - 10;
-  //   console.log("i am up");
-  // }
-
-  // arrowDown() {
-  //   this.yPosition = this.yPosition + 10;
-  //   console.log("i am down");
-  // }
-
-  // arrowLeft() {
-  //   this.xPosition = this.xPosition - 10;
-  //   console.log("i am left");
-  // }
-
-  // arrowRight() {
-  //   this.xPosition = this.xPosition + 10;
-  //   console.log("i am right");
-  // }
 }
 
 mychar = new Character(300, 75);
@@ -69,7 +50,6 @@ function animate() {
   requestAnimationFrame(animate);
   context.clearRect(0, 0, canvas.width, canvas.height);
   // Check which key was pressed and call the appropriate Car function.
-  // document.onekeydown = checkKey;
   window.addEventListener("keydown", doKeyDown); //add false parameter?
   window.addEventListener("keyup", doKeyUp, false); //add false parameter?
   document.getElementById("myCanvas").onmousemove = findObjectCoords;
@@ -85,19 +65,15 @@ function doKeyDown(e) {
   if (e.keyCode == "38" || e.keyCode == "87") {
     // up arrow
     mychar.up = true;
-    //mychar.arrowUp();
   } else if (e.keyCode == "40" || e.keyCode == "83") {
     // down arrow
     mychar.down = true;
-    //mychar.arrowDown();
   } else if (e.keyCode == "37" || e.keyCode == "65") {
     // left arrow
     mychar.left = true;
-    //mychar.arrowLeft();
   } else if (e.keyCode == "39" || e.keyCode == "68") {
     // right arrow
     mychar.right = true;
-    //mychar.arrowRight();
   }
 }
 
@@ -105,19 +81,15 @@ function doKeyUp(e) {
   if (e.keyCode == "38" || e.keyCode == "87") {
     // up arrow
     mychar.up = false;
-    //mychar.arrowUp();
   } else if (e.keyCode == "40" || e.keyCode == "83") {
     // down arrow
     mychar.down = false;
-    //mychar.arrowDown();
   } else if (e.keyCode == "37" || e.keyCode == "65") {
     // left arrow
     mychar.left = false;
-    //mychar.arrowLeft();
   } else if (e.keyCode == "39" || e.keyCode == "68") {
     // right arrow
     mychar.right = false;
-    //mychar.arrowRight();
   }
 }
 
