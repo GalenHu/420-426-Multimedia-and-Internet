@@ -25,28 +25,41 @@ class Character {
   }
 
   update() {
+    if(this.up == true){
+      this.yPosition = this.yPosition - 10;
+    }
+    if(this.down == true){
+      this.yPosition = this.yPosition + 10;
+    }
+    if(this.left == true){
+      this.xPosition = this.xPosition - 10;
+    }
+    if(this.right == true){
+      this.xPosition = this.xPosition + 10;
+    }
+    
     this.drawChar();
   }
 
-  arrowUp() {
-    this.yPosition = this.yPosition - 5;
-    console.log("i am up");
-  }
+  // arrowUp() {
+  //   this.yPosition = this.yPosition - 10;
+  //   console.log("i am up");
+  // }
 
-  arrowDown() {
-    this.yPosition = this.yPosition + 10;;
-    console.log("i am down");
-  }
+  // arrowDown() {
+  //   this.yPosition = this.yPosition + 10;
+  //   console.log("i am down");
+  // }
 
-  arrowLeft() {
-    this.xPosition = this.xPosition - 10;
-    console.log("i am left");
-  }
+  // arrowLeft() {
+  //   this.xPosition = this.xPosition - 10;
+  //   console.log("i am left");
+  // }
 
-  arrowRight() {
-    this.xPosition = this.xPosition + 10;
-    console.log("i am right");
-  }
+  // arrowRight() {
+  //   this.xPosition = this.xPosition + 10;
+  //   console.log("i am right");
+  // }
 }
 
 mychar = new Character(300, 75);
@@ -72,19 +85,19 @@ function doKeyDown(e) {
   if (e.keyCode == "38" || e.keyCode == "87") {
     // up arrow
     mychar.up = true;
-    mychar.arrowUp();
+    //mychar.arrowUp();
   } else if (e.keyCode == "40" || e.keyCode == "83") {
     // down arrow
     mychar.down = true;
-    mychar.arrowDown();
+    //mychar.arrowDown();
   } else if (e.keyCode == "37" || e.keyCode == "65") {
     // left arrow
     mychar.left = true;
-    mychar.arrowLeft();
+    //mychar.arrowLeft();
   } else if (e.keyCode == "39" || e.keyCode == "68") {
     // right arrow
     mychar.right = true;
-    mychar.arrowRight();
+    //mychar.arrowRight();
   }
 }
 
@@ -92,19 +105,19 @@ function doKeyUp(e) {
   if (e.keyCode == "38" || e.keyCode == "87") {
     // up arrow
     mychar.up = false;
-    mychar.arrowUp();
+    //mychar.arrowUp();
   } else if (e.keyCode == "40" || e.keyCode == "83") {
     // down arrow
     mychar.down = false;
-    mychar.arrowDown();
+    //mychar.arrowDown();
   } else if (e.keyCode == "37" || e.keyCode == "65") {
     // left arrow
     mychar.left = false;
-    mychar.arrowLeft();
+    //mychar.arrowLeft();
   } else if (e.keyCode == "39" || e.keyCode == "68") {
     // right arrow
     mychar.right = false;
-    mychar.arrowRight();
+    //mychar.arrowRight();
   }
 }
 
