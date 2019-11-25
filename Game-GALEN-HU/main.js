@@ -3,6 +3,7 @@ var context = canvas.getContext("2d");
 
 class Character {
   radius = 5;
+  speed = 5;
   xPosition;
   yPosition;
   up;
@@ -15,67 +16,86 @@ class Character {
   }
 
   drawChar() {
-    console.log("im a character");
+    //console.log("im a character");
     context.beginPath();
     context.arc(this.xPosition, this.yPosition, this.radius, 0, 2 * Math.PI);
     context.fillStyle = "red";
     context.closePath();
-    context.stroke();
     context.fill();
+    context.stroke();
+  }
+  update() {
+    //key
+    this.checkKey();
+    //check border
+    this.border();
+
+    this.drawChar();
+  }
+  checkKey() {
+    if (this.up) {
+      this.yPosition = this.yPosition - this.speed;
+    }
+    if (this.down) {
+      this.yPosition = this.yPosition + this.speed;
+    }
+    if (this.left) {
+      this.xPosition = this.xPosition - this.speed;
+    }
+    if (this.right) {
+      this.xPosition = this.xPosition + this.speed;
+    }
+  }
+  border() {
+    if (this.yPosition < this.radius) {
+      this.yPosition = this.radius;
+    }
+    if (this.yPosition > canvas.height - this.radius) {
+      this.yPosition = canvas.height - this.radius;
+    }
+    if (this.xPosition < this.radius) {
+      this.xPosition = this.radius;
+    }
+    if (this.xPosition > canvas.width - this.radius) {
+      this.xPosition = canvas.width - this.radius;
+    }
+  }
+}
+
+class Platform {
+  constructor(x1, y1, x2, y2) {
+    this.x1 = x1;
+    this.x2 = x2;
+    this.y1 = y1;
+    this.y2 = y2;
+  }
+
+  drawPlat() {
+    context.beginPath();
+    context.rect(this.x1, this.y1, this.x2, this.y2);
+    context.stroke();
   }
 
   update() {
-    if(this.up == true){
-      this.yPosition = this.yPosition - 10;
-    }
-    if(this.down == true){
-      this.yPosition = this.yPosition + 10;
-    }
-    if(this.left == true){
-      this.xPosition = this.xPosition - 10;
-    }
-    if(this.right == true){
-      this.xPosition = this.xPosition + 10;
-    }
-    
-    this.drawChar();
+    this.drawPlat();
   }
-
-<<<<<<< Updated upstream
-=======
-  arrowUp() {
-    this.yPosition = this.yPosition - 5;
-    console.log("i am up");
-  }
-
-  arrowDown() {
-    this.yPosition = this.yPosition + 10;
-    console.log("i am down");
-  }
-
-  arrowLeft() {
-    this.xPosition = this.xPosition - 10;
-    console.log("i am left");
-  }
-
-  arrowRight() {
-    this.xPosition = this.xPosition + 10;
-    console.log("i am right");
-  }
->>>>>>> Stashed changes
 }
 
 mychar = new Character(300, 75);
 mychar.drawChar();
 
+myplat = new Platform(20, 20, 150, 150);
+myplat.drawPlat();
 function animate() {
   requestAnimationFrame(animate);
   context.clearRect(0, 0, canvas.width, canvas.height);
+
   // Check which key was pressed and call the appropriate Car function.
   window.addEventListener("keydown", doKeyDown); //add false parameter?
   window.addEventListener("keyup", doKeyUp, false); //add false parameter?
   document.getElementById("myCanvas").onmousemove = findObjectCoords;
   mychar.update();
+  myplat.update();
 }
 
 animate();
@@ -83,7 +103,7 @@ animate();
 canvas.focus();
 
 function doKeyDown(e) {
-  console.log("test");
+  // console.log("test");
   if (e.keyCode == "38" || e.keyCode == "87") {
     // up arrow
     mychar.up = true;
@@ -138,7 +158,7 @@ function findObjectCoords(mouseEvent) {
   xpos -= obj_left;
   ypos -= obj_top;
   document.getElementById("objectCoords").innerHTML = xpos + ", " + ypos;
-  console.log(xpos + ", " + ypos);
+  // console.log(xpos + ", " + ypos);
   mychar.xPosition = xpos;
   mychar.yPosition = ypos;
 }
