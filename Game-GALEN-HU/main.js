@@ -41,6 +41,28 @@ class Character {
     this.drawChar();
   }
 
+<<<<<<< Updated upstream
+=======
+  arrowUp() {
+    this.yPosition = this.yPosition - 5;
+    console.log("i am up");
+  }
+
+  arrowDown() {
+    this.yPosition = this.yPosition + 10;
+    console.log("i am down");
+  }
+
+  arrowLeft() {
+    this.xPosition = this.xPosition - 10;
+    console.log("i am left");
+  }
+
+  arrowRight() {
+    this.xPosition = this.xPosition + 10;
+    console.log("i am right");
+  }
+>>>>>>> Stashed changes
 }
 
 mychar = new Character(300, 75);
