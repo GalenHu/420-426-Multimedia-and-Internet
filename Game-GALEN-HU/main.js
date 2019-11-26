@@ -1,5 +1,6 @@
-var canvas = document.getElementById("myCanvas");
-var context = canvas.getContext("2d");
+const canvas = document.getElementById("myCanvas");
+const context = canvas.getContext("2d");
+let countLvl = 0;
 
 class Character {
   radius = 5;
@@ -79,18 +80,19 @@ class Character {
 
 class Solid {
   x1;x2;y1;y2;
-  obsColor = "none";
+  color;
 
-  constructor(x1, y1, x2, y2) {
+  constructor(x1, y1, x2, y2, color) {
     this.x1 = x1;
     this.x2 = x2;
     this.y1 = y1;
     this.y2 = y2;
+    this.color = color
   }
 
   drawPlat() {
     context.beginPath();
-    context.fillStyle = this.obsColor
+    context.fillStyle = this.color
     context.rect(this.x1, this.y1, this.x2, this.y2);
     context.closePath();
     context.fill();
@@ -101,20 +103,9 @@ class Solid {
   update() {
     this.drawPlat();
   }
-
 }
 
-obs1 = new Solid(0, 0, 160, 500);
-obs2 = new Solid(300,55, 500, 500);
-obs1.drawPlat();
-obs2.drawPlat();
-
-mychar = new Character(300, 75);
-mychar.drawChar();
-
-
-
-
+lvl0();
 
 
 function animate() {
@@ -125,32 +116,42 @@ function animate() {
   window.addEventListener("keydown", doKeyDown); //add false parameter?
   window.addEventListener("keyup", doKeyUp, false); //add false parameter?
   document.getElementById("myCanvas").onmousemove = findObjectCoords;
-  intersect(mychar,obs1);
-  intersect(mychar,obs2);
-  mychar.update();
-  obs1.update();
-  obs2.update();
+
+  switch(countLvl){
+    case 0:
+      lvl0editor();
+      break;
+  }
+
 }
 
 animate();
 
 canvas.focus();
 
-function intersect(character, obstacle){
+function intersect(character, obstacle, AreUGood){
   myLeft = character.xPosition-character.radius;
   myRight = character.xPosition+character.radius;
   myTop = character.yPosition-character.radius;
   myBottom = character.yPosition+character.radius;
   if(myRight>obstacle.x1 && myLeft < obstacle.x2 && myBottom > obstacle.y1 && myTop < obstacle.y2){
-    console.log(true);
+    // console.log(true);
     character.contact(true, "blue");
-    character.speed = 0.2;
+    character.speed = 1;
+    if(AreUGood == false){
+      console.log("Game Over");
+    }
+    if(AreUGood == true){
+      console.log("Next Level");
+      nextLevel();
+    }
   }
   else{
     character.contact(false, "red");
     character.speed = 5;
   }
 }
+
 function doKeyDown(e) {
   // console.log("test");
   if (e.keyCode == "38" || e.keyCode == "87") {
@@ -211,4 +212,48 @@ function findObjectCoords(mouseEvent) {
   console.log(xpos + ", " + ypos);
   mychar.xPosition = xpos;
   mychar.yPosition = ypos;
+}
+
+function nextLevel(){
+  countLvl++;
+  switch(countLvl){
+    case 1:
+      lvl1();
+      break;
+  }
+}
+
+function lvl0(){
+  //draw obstacle
+  obs1 = new Solid(0, 0, 160, 500, "teal");
+  obs2 = new Solid(300,55, 500, 500, "teal");
+  obs3 = new Solid(160,0,500,10, "teal");
+  obs1.drawPlat();
+  obs2.drawPlat();
+  obs3.drawPlat();
+
+  //draw character
+  mychar = new Character(230, 490);
+  mychar.drawChar();
+
+  goal1= new Solid(450, 10, 500, 55, "yellow");
+}
+
+function lvl0editor(){
+   //Check intersection
+   intersect(mychar,obs1, false);
+   intersect(mychar,obs2, false);
+   intersect(mychar,obs3, false);
+   intersect(mychar,goal1, true);
+ 
+   //Check position
+   goal1.update();
+   obs1.update();
+   obs2.update();
+   obs3.update();
+   mychar.update();
+}
+
+function lvl1(){
+  console.log("This is lvl 1");
 }
