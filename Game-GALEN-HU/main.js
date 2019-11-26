@@ -10,6 +10,9 @@ class Character {
   down;
   left;
   right;
+  color = "red";
+
+
   constructor(x, y) {
     this.xPosition = x;
     this.yPosition = y;
@@ -19,7 +22,7 @@ class Character {
     //console.log("im a character");
     context.beginPath();
     context.arc(this.xPosition, this.yPosition, this.radius, 0, 2 * Math.PI);
-    context.fillStyle = "red";
+    context.fillStyle = this.color;
     context.closePath();
     context.fill();
     context.stroke();
@@ -29,7 +32,9 @@ class Character {
     this.checkKey();
     //check border
     this.border();
-
+    //touch an obstacle?
+    this.contact();
+    //draw updated position of character
     this.drawChar();
   }
   checkKey() {
@@ -60,9 +65,21 @@ class Character {
       this.xPosition = canvas.width - this.radius;
     }
   }
+
+  contact(touch, color){
+    if(touch == true){
+      //gameOver();
+      this.color = color;
+    }
+    if(touch == false){
+      this.color = color;
+    }
+  }
 }
 
-class Platform {
+class Solid {
+  x1;x2;y1;y2;
+
   constructor(x1, y1, x2, y2) {
     this.x1 = x1;
     this.x2 = x2;
@@ -79,13 +96,17 @@ class Platform {
   update() {
     this.drawPlat();
   }
+
 }
 
 mychar = new Character(300, 75);
 mychar.drawChar();
 
-myplat = new Platform(20, 20, 150, 150);
+myplat = new Solid(20, 20, 150, 150);
 myplat.drawPlat();
+
+
+
 function animate() {
   requestAnimationFrame(animate);
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -94,6 +115,7 @@ function animate() {
   window.addEventListener("keydown", doKeyDown); //add false parameter?
   window.addEventListener("keyup", doKeyUp, false); //add false parameter?
   document.getElementById("myCanvas").onmousemove = findObjectCoords;
+  intersect(mychar,myplat);
   mychar.update();
   myplat.update();
 }
@@ -102,6 +124,23 @@ animate();
 
 canvas.focus();
 
+function intersect(character, obstacle){
+  myLeft = character.xPosition-character.radius;
+  myRight = character.xPosition+character.radius;
+  myTop = character.yPosition-character.radius;
+  myBottom = character.yPosition+character.radius;
+  if(myRight>obstacle.x1 && myLeft < obstacle.x2+20 && myBottom > obstacle.y1 && myTop < obstacle.y2+20){
+    console.log(true);
+    
+    character.contact(true, "blue");
+    character.speed = 0.2;
+  }
+  else{
+    console.log(false);
+    character.contact(false, "red");
+    character.speed = 5;
+  }
+}
 function doKeyDown(e) {
   // console.log("test");
   if (e.keyCode == "38" || e.keyCode == "87") {
@@ -117,6 +156,7 @@ function doKeyDown(e) {
     // right arrow
     mychar.right = true;
   }
+  
 }
 
 function doKeyUp(e) {
@@ -158,7 +198,7 @@ function findObjectCoords(mouseEvent) {
   xpos -= obj_left;
   ypos -= obj_top;
   document.getElementById("objectCoords").innerHTML = xpos + ", " + ypos;
-  // console.log(xpos + ", " + ypos);
+  console.log(xpos + ", " + ypos);
   mychar.xPosition = xpos;
   mychar.yPosition = ypos;
 }
