@@ -13,7 +13,6 @@ class Character {
   right;
   color = "red";
 
-
   constructor(x, y) {
     this.xPosition = x;
     this.yPosition = y;
@@ -67,19 +66,21 @@ class Character {
     }
   }
 
-  contact(touch, color){
-    if(touch == true){
-      //gameOver();
+  contact(touch, color) {
+    if (touch == true) {
       this.color = color;
     }
-    if(touch == false){
+    if (touch == false) {
       this.color = color;
     }
   }
 }
 
 class Solid {
-  x1;x2;y1;y2;
+  x1;
+  x2;
+  y1;
+  y2;
   color;
 
   constructor(x1, y1, x2, y2, color) {
@@ -87,17 +88,16 @@ class Solid {
     this.x2 = x2;
     this.y1 = y1;
     this.y2 = y2;
-    this.color = color
+    this.color = color;
   }
 
   drawPlat() {
     context.beginPath();
-    context.fillStyle = this.color
+    context.fillStyle = this.color;
     context.rect(this.x1, this.y1, this.x2, this.y2);
     context.closePath();
     context.fill();
     context.stroke();
-
   }
 
   update() {
@@ -105,8 +105,7 @@ class Solid {
   }
 }
 
-lvl0();
-
+lvl1();
 
 function animate() {
   requestAnimationFrame(animate);
@@ -117,39 +116,50 @@ function animate() {
   window.addEventListener("keyup", doKeyUp, false); //add false parameter?
   document.getElementById("myCanvas").onmousemove = findObjectCoords;
 
-  switch(countLvl){
+  switch (countLvl) {
     case 0:
-      lvl0editor();
+      lvl1editor();
       break;
   }
-
 }
 
 animate();
 
 canvas.focus();
 
-function intersect(character, obstacle, AreUGood){
-  myLeft = character.xPosition-character.radius;
-  myRight = character.xPosition+character.radius;
-  myTop = character.yPosition-character.radius;
-  myBottom = character.yPosition+character.radius;
-  if(myRight>obstacle.x1 && myLeft < obstacle.x2 && myBottom > obstacle.y1 && myTop < obstacle.y2){
+function intersect(character, obstacle, AreUGood) {
+  myLeft = character.xPosition - character.radius;
+  myRight = character.xPosition + character.radius;
+  myTop = character.yPosition - character.radius;
+  myBottom = character.yPosition + character.radius;
+  if (
+    myRight > obstacle.x1 &&
+    myLeft < obstacle.x2 &&
+    myBottom > obstacle.y1 &&
+    myTop < obstacle.y2
+  ) {
     // console.log(true);
     character.contact(true, "blue");
     character.speed = 1;
-    if(AreUGood == false){
-      console.log("Game Over");
+    if (AreUGood == false) {
+      gameOver();
     }
-    if(AreUGood == true){
+    if (AreUGood == true) {
       console.log("Next Level");
       nextLevel();
     }
-  }
-  else{
+  } else {
     character.contact(false, "red");
     character.speed = 5;
   }
+}
+
+function gameOver() {
+  console.log("Game Over");
+
+  let img = document.createElement("img");
+  img.src = "awake.jpg";
+  context.drawImage(img, 0, 0, 500, 500);
 }
 
 function doKeyDown(e) {
@@ -167,7 +177,6 @@ function doKeyDown(e) {
     // right arrow
     mychar.right = true;
   }
-  
 }
 
 function doKeyUp(e) {
@@ -214,20 +223,20 @@ function findObjectCoords(mouseEvent) {
   mychar.yPosition = ypos;
 }
 
-function nextLevel(){
+function nextLevel() {
   countLvl++;
-  switch(countLvl){
+  switch (countLvl) {
     case 1:
       lvl1();
       break;
   }
 }
 
-function lvl0(){
+function lvl1() {
   //draw obstacle
   obs1 = new Solid(0, 0, 160, 500, "teal");
-  obs2 = new Solid(300,55, 500, 500, "teal");
-  obs3 = new Solid(160,0,500,10, "teal");
+  obs2 = new Solid(300, 55, 500, 500, "teal");
+  obs3 = new Solid(160, 0, 500, 10, "teal");
   obs1.drawPlat();
   obs2.drawPlat();
   obs3.drawPlat();
@@ -236,24 +245,24 @@ function lvl0(){
   mychar = new Character(230, 490);
   mychar.drawChar();
 
-  goal1= new Solid(450, 10, 500, 55, "yellow");
+  goal1 = new Solid(450, 10, 500, 55, "yellow");
 }
 
-function lvl0editor(){
-   //Check intersection
-   intersect(mychar,obs1, false);
-   intersect(mychar,obs2, false);
-   intersect(mychar,obs3, false);
-   intersect(mychar,goal1, true);
- 
-   //Check position
-   goal1.update();
-   obs1.update();
-   obs2.update();
-   obs3.update();
-   mychar.update();
+function lvl1editor() {
+  //Check intersection
+  intersect(mychar, obs1, false);
+  intersect(mychar, obs2, false);
+  intersect(mychar, obs3, false);
+  intersect(mychar, goal1, true);
+
+  //Check position
+  goal1.update();
+  obs1.update();
+  obs2.update();
+  obs3.update();
+  mychar.update();
 }
 
-function lvl1(){
-  console.log("This is lvl 1");
+function lvl2() {
+  console.log("This is lvl 2");
 }
