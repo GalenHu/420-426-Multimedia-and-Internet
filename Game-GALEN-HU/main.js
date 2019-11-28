@@ -227,7 +227,7 @@ function nextLevel() {
   countLvl++;
   switch (countLvl) {
     case 1:
-      lvl1();
+      lvl2();
       break;
   }
 }
