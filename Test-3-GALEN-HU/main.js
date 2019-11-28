@@ -72,6 +72,10 @@ class Square {
     this.drawSquare();
   }
 
+  gameOver() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
   changeVelocity() {
     this.velocity = {
       x: Math.random() < 0.5 ? Math.random() * -5 : Math.random() * 5,
@@ -82,6 +86,7 @@ class Square {
 
   eraseSquare() {
     context.clearRect(0, 0, canvas.width, canvas.height);
+    console.log("gameOver");
     gameOver = true;
   }
 }
@@ -89,17 +94,17 @@ class Square {
 let square = new Square();
 square.drawSquare();
 
-// canvas.addEventListener("keydown", event => {
-//   keys[event.key] = true; // Remember that you can refer to a key in an object by using a string index.
-// });
-
 function animate() {
   requestAnimationFrame(animate);
   context.clearRect(0, 0, canvas.width, canvas.height);
 
   window.addEventListener("keydown", doKeyDown);
   window.addEventListener("mousedown", mouse);
-  square.update();
+  if (!gameOver) {
+    square.update();
+  } else {
+    square.gameOver();
+  }
   timer();
 }
 
@@ -123,7 +128,7 @@ function timer() {
     }
     document.getElementById("timer").innerHTML = +sec + "s";
   } else {
-    document.getElementById("timer").innerHTML = +sec + "s";
+    document.getElementById("timer").innerHTML = +sec + "s game over";
   }
 }
 
