@@ -1,21 +1,29 @@
 const canvas = document.getElementById("myCanvas");
 const context = canvas.getContext("2d");
 let countLvl = 0;
+let gOver = false;
+let dead = false;
+let playmusic = false;
+
+window.onload = function() {
+  // document.getElementById("my_audio").play();
+  // gameOverSound();
+  console.log("lol");
+};
 
 class Character {
-  radius = 5;
-  speed = 5;
-  xPosition;
-  yPosition;
-  up;
-  down;
-  left;
-  right;
-  color = "red";
-
   constructor(x, y) {
     this.xPosition = x;
     this.yPosition = y;
+    this.radius = 5;
+    this.speed = 5;
+    this.xPosition;
+    this.yPosition;
+    this.up;
+    this.down;
+    this.left;
+    this.right;
+    this.color = "red";
   }
 
   drawChar() {
@@ -77,12 +85,6 @@ class Character {
 }
 
 class Solid {
-  x1;
-  x2;
-  y1;
-  y2;
-  color;
-
   constructor(x1, y1, x2, y2, color) {
     this.x1 = x1;
     this.x2 = x2;
@@ -92,12 +94,14 @@ class Solid {
   }
 
   drawPlat() {
+    context.save();
     context.beginPath();
     context.fillStyle = this.color;
     context.rect(this.x1, this.y1, this.x2, this.y2);
     context.closePath();
     context.fill();
     context.stroke();
+    context.restore();
   }
 
   update() {
@@ -106,6 +110,8 @@ class Solid {
 }
 
 lvl1();
+animate();
+canvas.focus();
 
 function animate() {
   requestAnimationFrame(animate);
@@ -116,16 +122,34 @@ function animate() {
   window.addEventListener("keyup", doKeyUp, false); //add false parameter?
   document.getElementById("myCanvas").onmousemove = findObjectCoords;
 
-  switch (countLvl) {
-    case 0:
-      lvl1editor();
-      break;
+  if (!gOver) {
+    switch (countLvl) {
+      case 0:
+        lvl1editor();
+        break;
+      case 1:
+        lvl2editor();
+        break;
+      case 2:
+        lvl3editor();
+    }
+  }
+  if (gOver == true) {
+    console.log("gameover  is true");
+    let img = document.createElement("img");
+    img.src = "awake.jpg";
+    context.drawImage(img, 0, 0, 500, 500);
+    if (!dead) {
+      gameOverSound();
+      dead = true;
+      console.log("im dead");
+    }
   }
 }
-
-animate();
-
-canvas.focus();
+function gameOverSound() {
+  let sound = new Audio("omae.mp3");
+  sound.play();
+}
 
 function intersect(character, obstacle, AreUGood) {
   myLeft = character.xPosition - character.radius;
@@ -134,13 +158,17 @@ function intersect(character, obstacle, AreUGood) {
   myBottom = character.yPosition + character.radius;
   if (
     myRight > obstacle.x1 &&
-    myLeft < obstacle.x2 &&
+    myLeft < obstacle.x1 + obstacle.x2 &&
     myBottom > obstacle.y1 &&
-    myTop < obstacle.y2
+    myTop < obstacle.y1 + obstacle.y2
   ) {
-    // console.log(true);
-    character.contact(true, "blue");
-    character.speed = 1;
+    console.log(
+      obstacle.x1,
+      obstacle.y1,
+      obstacle.x1 + obstacle.x2,
+      obstacle.y1 + obstacle.y2,
+      "game Over"
+    );
     if (AreUGood == false) {
       gameOver();
     }
@@ -155,11 +183,9 @@ function intersect(character, obstacle, AreUGood) {
 }
 
 function gameOver() {
-  console.log("Game Over");
+  // console.log("Game Over");
 
-  let img = document.createElement("img");
-  img.src = "awake.jpg";
-  context.drawImage(img, 0, 0, 500, 500);
+  gOver = true;
 }
 
 function doKeyDown(e) {
@@ -229,9 +255,12 @@ function nextLevel() {
     case 1:
       lvl2();
       break;
+    case 2:
+      lvl3();
+      break;
   }
 }
-
+// #region lvl1
 function lvl1() {
   //draw obstacle
   obs1 = new Solid(0, 0, 160, 500, "teal");
@@ -262,7 +291,52 @@ function lvl1editor() {
   obs3.update();
   mychar.update();
 }
+// #endregion
 
+// #region lvl2
 function lvl2() {
   console.log("This is lvl 2");
+  obs4 = new Solid(100, 0, 300, 400, "tomato");
+  goal2 = new Solid(0, 0, 100, 100, "yellow");
+  obs4.drawPlat();
 }
+
+function lvl2editor() {
+  intersect(mychar, obs4, false);
+  intersect(mychar, goal2, true);
+  obs4.update();
+  goal2.update();
+  mychar.update();
+}
+// #endregion
+
+// #region lvl3
+
+function lvl3() {
+  console.log("This is lvl3");
+  obs5 = new Solid(100, 0, 50, 450, "slateblue");
+  obs6 = new Solid(200, 50, 50, 450, "slateblue");
+  obs7 = new Solid(300, 0, 50, 450, "slateblue");
+  obs8 = new Solid(400, 50, 50, 450, "slateblue");
+
+  obs5.drawPlat();
+  obs6.drawPlat();
+  obs7.drawPlat();
+  obs8.drawPlat();
+}
+
+function lvl3editor() {
+  intersect(mychar, obs5, false);
+  intersect(mychar, obs6, false);
+  intersect(mychar, obs7, false);
+  intersect(mychar, obs8, false);
+
+  obs5.update();
+  obs6.update();
+  obs7.update();
+  obs8.update();
+
+  mychar.update();
+}
+
+// #endregion
