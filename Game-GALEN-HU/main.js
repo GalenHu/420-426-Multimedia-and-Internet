@@ -264,7 +264,6 @@ function findObjectCoords(mouseEvent) {
     canvas.addEventListener('click', function(){
       if(countLvl == -1)
         nextLevel();
-        // document.getElementById("myCanvas").style.cursor = "none";
     })
   }
 }
@@ -276,6 +275,7 @@ function nextLevel() {
       menuStart();
       break;
     case 0:
+      document.getElementById("myCanvas").style.cursor = "none";
       lvl1();
       break;
     case 1:
