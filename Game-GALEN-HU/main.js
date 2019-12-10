@@ -1,15 +1,10 @@
 const canvas = document.getElementById("myCanvas");
 const context = canvas.getContext("2d");
-let countLvl = 0;
+let countLvl = -2;
 let gOver = false;
 let dead = false;
 let playmusic = false;
 
-window.onload = function() {
-  // document.getElementById("my_audio").play();
-  // gameOverSound();
-  console.log("lol");
-};
 
 class Character {
   constructor(x, y) {
@@ -106,12 +101,28 @@ class Solid {
 
   update() {
     this.drawPlat();
+    
   }
 }
 
-lvl1();
+nextLevel();
 animate();
 canvas.focus();
+
+function menuStart(){
+  //draw character
+mychar = new Character(230, 490);
+mychar.drawChar();
+
+  context.beginPath();
+  context.rect(166,420,129,80)
+  context.closePath();
+  context.stroke();
+  context.font = "30px Arial";
+  context.fillText("Click here to start game",170,450,100)
+
+
+}
 
 function animate() {
   requestAnimationFrame(animate);
@@ -124,6 +135,9 @@ function animate() {
 
   if (!gOver) {
     switch (countLvl) {
+      case -1:
+        menuStart();
+        break;
       case 0:
         lvl1editor();
         break;
@@ -183,8 +197,6 @@ function intersect(character, obstacle, AreUGood) {
 }
 
 function gameOver() {
-  // console.log("Game Over");
-
   gOver = true;
 }
 
@@ -246,12 +258,26 @@ function findObjectCoords(mouseEvent) {
   document.getElementById("objectCoords").innerHTML = xpos + ", " + ypos;
   console.log(xpos + ", " + ypos);
   mychar.xPosition = xpos;
-  mychar.yPosition = ypos;
+  mychar.yPosition = ypos
+
+  if(xpos > 166 && xpos < 166+129 && ypos > 420 && ypos < 420+80){
+    canvas.addEventListener('click', function(){
+      if(countLvl == -1)
+        nextLevel();
+        // document.getElementById("myCanvas").style.cursor = "none";
+    })
+  }
 }
 
 function nextLevel() {
   countLvl++;
   switch (countLvl) {
+    case -1:
+      menuStart();
+      break;
+    case 0:
+      lvl1();
+      break;
     case 1:
       lvl2();
       break;
@@ -270,9 +296,7 @@ function lvl1() {
   obs2.drawPlat();
   obs3.drawPlat();
 
-  //draw character
-  mychar = new Character(230, 490);
-  mychar.drawChar();
+
 
   goal1 = new Solid(450, 10, 500, 55, "yellow");
 }
