@@ -95,7 +95,6 @@ class Solid {
     context.rect(this.x1, this.y1, this.x2, this.y2);
     context.closePath();
     context.fill();
-    context.stroke();
     context.restore();
   }
 
@@ -146,6 +145,8 @@ function animate() {
         break;
       case 2:
         lvl3editor();
+      case 3:
+        lvl4editor();
     }
   }
   if (gOver == true) {
@@ -165,7 +166,7 @@ function gameOverSound() {
   sound.play();
 }
 
-function intersect(character, obstacle, AreUGood) {
+function intersect(character, obstacle, AreUGood, AreUJumpscare) {
   myLeft = character.xPosition - character.radius;
   myRight = character.xPosition + character.radius;
   myTop = character.yPosition - character.radius;
@@ -189,6 +190,9 @@ function intersect(character, obstacle, AreUGood) {
     if (AreUGood == true) {
       console.log("Next Level");
       nextLevel();
+    }
+    if(AreUJumpscare == true){
+      console.log("PIKABOO");
     }
   } else {
     character.contact(false, "red");
@@ -275,7 +279,7 @@ function nextLevel() {
       menuStart();
       break;
     case 0:
-      document.getElementById("myCanvas").style.cursor = "none";
+      // document.getElementById("myCanvas").style.cursor = "none";
       lvl1();
       break;
     case 1:
@@ -283,6 +287,9 @@ function nextLevel() {
       break;
     case 2:
       lvl3();
+      break;
+    case 3:
+      lvl4();
       break;
   }
 }
@@ -320,16 +327,16 @@ function lvl1editor() {
 // #region lvl2
 function lvl2() {
   console.log("This is lvl 2");
-  obs4 = new Solid(100, 0, 300, 400, "tomato");
-  goal2 = new Solid(0, 0, 100, 100, "yellow");
-  obs4.drawPlat();
+  obs1 = new Solid(100, 0, 300, 400, "tomato");
+  goal1 = new Solid(0, 0, 100, 100, "yellow");
+  obs1.drawPlat();
 }
 
 function lvl2editor() {
-  intersect(mychar, obs4, false);
-  intersect(mychar, goal2, true);
-  obs4.update();
-  goal2.update();
+  intersect(mychar, obs1, false);
+  intersect(mychar, goal1, true);
+  obs1.update();
+  goal1.update();
   mychar.update();
 }
 // #endregion
@@ -338,29 +345,45 @@ function lvl2editor() {
 
 function lvl3() {
   console.log("This is lvl3");
-  obs5 = new Solid(100, 0, 50, 450, "slateblue");
-  obs6 = new Solid(200, 50, 50, 450, "slateblue");
-  obs7 = new Solid(300, 0, 50, 450, "slateblue");
-  obs8 = new Solid(400, 50, 50, 450, "slateblue");
+  obs1 = new Solid(100, 0, 50, 450, "slateblue");
+  obs2 = new Solid(200, 50, 50, 450, "slateblue");
+  obs3 = new Solid(300, 0, 50, 450, "slateblue");
+  obs4 = new Solid(400, 50, 50, 450, "slateblue");
 
-  obs5.drawPlat();
-  obs6.drawPlat();
-  obs7.drawPlat();
-  obs8.drawPlat();
+  obs1.drawPlat();
+  obs2.drawPlat();
+  obs3.drawPlat();
+  obs4.drawPlat();
+
+  goal1 = new Solid(450,450,50,50,"yellow");
 }
 
 function lvl3editor() {
-  intersect(mychar, obs5, false);
-  intersect(mychar, obs6, false);
-  intersect(mychar, obs7, false);
-  intersect(mychar, obs8, false);
+  intersect(mychar, obs1, false);
+  intersect(mychar, obs2, false);
+  intersect(mychar, obs3, false);
+  intersect(mychar, obs4, false);
+  intersect(mychar, goal1, true);
 
-  obs5.update();
-  obs6.update();
-  obs7.update();
-  obs8.update();
+  obs1.update();
+  obs2.update();
+  obs3.update();
+  obs4.update();
+  goal1.update();
 
   mychar.update();
 }
 
 // #endregion
+
+function lvl4(){
+  obs1 = new Solid(100, 380,389,50,"gray");
+
+}
+
+function lvl4editor(){
+  intersect(mychar,obs1,false);
+
+  obs1.update();
+  mychar.update();
+}
