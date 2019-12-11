@@ -4,6 +4,9 @@ let countLvl = -2;
 let gOver = false;
 let dead = false;
 let playmusic = false;
+let bgmusic = false;
+let bgsound = new Audio("Skyrim-nighttime.mp3");
+
 
 class Character {
   constructor(x, y) {
@@ -99,6 +102,7 @@ class Solid {
 
   update() {
     this.drawPlat();
+    
   }
 }
 
@@ -106,17 +110,19 @@ nextLevel();
 animate();
 canvas.focus();
 
-function menuStart() {
+function menuStart(){
   //draw character
-  mychar = new Character(230, 490);
-  mychar.drawChar();
+mychar = new Character(230, 490);
+mychar.drawChar();
 
   context.beginPath();
-  context.rect(166, 420, 129, 80);
+  context.rect(166,420,129,80)
   context.closePath();
   context.stroke();
   context.font = "30px Arial";
-  context.fillText("Click here to start game", 170, 450, 100);
+  context.fillText("Click here to start game",170,450,100)
+
+
 }
 
 function animate() {
@@ -158,8 +164,9 @@ function animate() {
   }
 }
 function gameOverSound() {
-  let sound = new Audio("omae.mp3");
-  sound.play();
+  backgroundmusic(false);
+  let deathsound = new Audio("omae.mp3");
+  deathsound.play();
 }
 
 function intersect(character, obstacle, AreUGood, AreUJumpscare) {
@@ -187,7 +194,7 @@ function intersect(character, obstacle, AreUGood, AreUJumpscare) {
       console.log("Next Level");
       nextLevel();
     }
-    if (AreUJumpscare == true) {
+    if(AreUJumpscare == true){
       console.log("PIKABOO");
     }
   } else {
@@ -258,13 +265,26 @@ function findObjectCoords(mouseEvent) {
   document.getElementById("objectCoords").innerHTML = xpos + ", " + ypos;
   console.log(xpos + ", " + ypos);
   mychar.xPosition = xpos;
-  mychar.yPosition = ypos;
+  mychar.yPosition = ypos
 
-  if (xpos > 166 && xpos < 166 + 129 && ypos > 420 && ypos < 420 + 80) {
-    canvas.addEventListener("click", function() {
-      if (countLvl == -1) nextLevel();
-    });
+  if(xpos > 166 && xpos < 166+129 && ypos > 420 && ypos < 420+80){
+    canvas.addEventListener('click', function(){
+      console.log("music start to play");
+      if(bgmusic == false){
+        backgroundmusic(true);
+        bgmusic = true
+      }
+      if(countLvl == -1)
+        nextLevel();
+    })
   }
+}
+function backgroundmusic(playit){
+  if(playit){
+    bgsound.play();
+  }
+  else
+    bgsound.pause();
 }
 
 function nextLevel() {
@@ -297,6 +317,8 @@ function lvl1() {
   obs1.drawPlat();
   obs2.drawPlat();
   obs3.drawPlat();
+
+
 
   goal1 = new Solid(450, 10, 500, 55, "yellow");
 }
@@ -348,7 +370,7 @@ function lvl3() {
   obs3.drawPlat();
   obs4.drawPlat();
 
-  goal1 = new Solid(450, 450, 50, 50, "yellow");
+  goal1 = new Solid(450,450,50,50,"yellow");
 }
 
 function lvl3editor() {
@@ -369,13 +391,20 @@ function lvl3editor() {
 
 // #endregion
 
-function lvl4() {
-  obs1 = new Solid(100, 380, 389, 50, "gray");
+function lvl4(){
+  obs1 = new Solid(100, 380,389,50,"gray");
+  obs2 = new Solid(0, 270, 300,95,"gray");
+  obs3 = new Solid(355,319,200,30,"gray");
+  
 }
 
-function lvl4editor() {
-  intersect(mychar, obs1, false);
-
+function lvl4editor(){
+  intersect(mychar,obs1,false);
+  intersect(mychar,obs2,false);
+  intersect(mychar,obs3,false);
+  
   obs1.update();
+  obs2.update();
+  obs3.update();
   mychar.update();
 }
