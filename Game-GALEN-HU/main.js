@@ -154,12 +154,7 @@ function animate() {
     }
   }
   if (gOver == true) {
-    console.log("gameover  is true");
     drawBgImage("awake.jpg");
-    // let img = document.createElement("img");
-    // img.src = "awake.jpg";
-    // context.drawImage(img, 0, 0, 500, 500);
-
     if (!dead) {
       gameOverSound();
       dead = true;
@@ -185,7 +180,7 @@ function realJump(){
 }
 
 function drawBgImage(source){
-  console.log("drawing image");
+  // console.log("drawing image");
   let img = document.createElement("img");
   img.src = source;
   context.drawImage(img, 0, 0, 500, 500);
