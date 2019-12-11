@@ -5,7 +5,9 @@ let gOver = false;
 let dead = false;
 let playmusic = false;
 let bgmusic = false;
+let jscare = false;
 let bgsound = new Audio("Skyrim-nighttime.mp3");
+let playoncejscare = false;
 
 
 class Character {
@@ -153,16 +155,37 @@ function animate() {
   }
   if (gOver == true) {
     console.log("gameover  is true");
+    drawBgImage("awake.jpg");
     let img = document.createElement("img");
     img.src = "awake.jpg";
     context.drawImage(img, 0, 0, 500, 500);
+
     if (!dead) {
       gameOverSound();
       dead = true;
       console.log("im dead");
     }
   }
+  if(jscare == true && playoncejscare == false){
+    let knock = new Audio("knock.mp3");
+    knock.play();
+    playoncejscare = true;
+    setTimeout(realJump(),5000);
+  }
 }
+function realJump(){
+  backgroundmusic(false);
+  drawBgImage("curse.jpg");
+  let scream = new Audio("Hello.mp3")
+  scream.play();
+}
+
+function drawBgImage(source){
+  let img = document.createElement("img");
+  img.src = source;
+  context.drawImage(img, 0, 0, 500, 500);
+}
+
 function gameOverSound() {
   backgroundmusic(false);
   let deathsound = new Audio("omae.mp3");
@@ -187,7 +210,7 @@ function intersect(character, obstacle, AreUGood, AreUJumpscare) {
       obstacle.y1 + obstacle.y2,
       "game Over"
     );
-    if (AreUGood == false) {
+    if (AreUGood == false && AreUJumpscare == false) {
       gameOver();
     }
     if (AreUGood == true) {
@@ -196,11 +219,16 @@ function intersect(character, obstacle, AreUGood, AreUJumpscare) {
     }
     if(AreUJumpscare == true){
       console.log("PIKABOO");
+      jumpscare();
     }
   } else {
     character.contact(false, "red");
     character.speed = 5;
   }
+}
+function jumpscare(){
+
+  jscare = true;
 }
 
 function gameOver() {
@@ -395,6 +423,7 @@ function lvl4(){
   obs1 = new Solid(100, 380,389,50,"gray");
   obs2 = new Solid(0, 270, 300,95,"gray");
   obs3 = new Solid(355,319,200,30,"gray");
+  obs4 = new Solid(477,354,20,20,"white");
   
 }
 
@@ -402,9 +431,11 @@ function lvl4editor(){
   intersect(mychar,obs1,false);
   intersect(mychar,obs2,false);
   intersect(mychar,obs3,false);
+  intersect(mychar,obs4,false,true);
   
   obs1.update();
   obs2.update();
   obs3.update();
+  obs4.update();
   mychar.update();
 }
