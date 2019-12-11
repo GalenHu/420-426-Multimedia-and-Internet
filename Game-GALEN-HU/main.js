@@ -4,6 +4,7 @@ let countLvl = -2;
 let gOver = false;
 let dead = false;
 let playmusic = false;
+let deathsound = "awake.mp3";
 
 
 class Character {
@@ -104,6 +105,7 @@ class Solid {
   }
 }
 
+<<<<<<< Updated upstream
 nextLevel();
 animate();
 canvas.focus();
@@ -122,6 +124,14 @@ mychar.drawChar();
 
 
 }
+=======
+startmenu();
+lvl1();
+animate();
+canvas.focus();
+
+function startmenu() {}
+>>>>>>> Stashed changes
 
 function animate() {
   requestAnimationFrame(animate);
@@ -162,7 +172,7 @@ function animate() {
   }
 }
 function gameOverSound() {
-  let sound = new Audio("omae.mp3");
+  let sound = new Audio(deathsound);
   sound.play();
 }
 
