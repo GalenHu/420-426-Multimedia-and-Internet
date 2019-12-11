@@ -4,8 +4,6 @@ let countLvl = -2;
 let gOver = false;
 let dead = false;
 let playmusic = false;
-let deathsound = "awake.mp3";
-
 
 class Character {
   constructor(x, y) {
@@ -101,37 +99,25 @@ class Solid {
 
   update() {
     this.drawPlat();
-    
   }
 }
 
-<<<<<<< Updated upstream
 nextLevel();
 animate();
 canvas.focus();
 
-function menuStart(){
+function menuStart() {
   //draw character
-mychar = new Character(230, 490);
-mychar.drawChar();
+  mychar = new Character(230, 490);
+  mychar.drawChar();
 
   context.beginPath();
-  context.rect(166,420,129,80)
+  context.rect(166, 420, 129, 80);
   context.closePath();
   context.stroke();
   context.font = "30px Arial";
-  context.fillText("Click here to start game",170,450,100)
-
-
+  context.fillText("Click here to start game", 170, 450, 100);
 }
-=======
-startmenu();
-lvl1();
-animate();
-canvas.focus();
-
-function startmenu() {}
->>>>>>> Stashed changes
 
 function animate() {
   requestAnimationFrame(animate);
@@ -172,7 +158,7 @@ function animate() {
   }
 }
 function gameOverSound() {
-  let sound = new Audio(deathsound);
+  let sound = new Audio("omae.mp3");
   sound.play();
 }
 
@@ -201,7 +187,7 @@ function intersect(character, obstacle, AreUGood, AreUJumpscare) {
       console.log("Next Level");
       nextLevel();
     }
-    if(AreUJumpscare == true){
+    if (AreUJumpscare == true) {
       console.log("PIKABOO");
     }
   } else {
@@ -272,13 +258,12 @@ function findObjectCoords(mouseEvent) {
   document.getElementById("objectCoords").innerHTML = xpos + ", " + ypos;
   console.log(xpos + ", " + ypos);
   mychar.xPosition = xpos;
-  mychar.yPosition = ypos
+  mychar.yPosition = ypos;
 
-  if(xpos > 166 && xpos < 166+129 && ypos > 420 && ypos < 420+80){
-    canvas.addEventListener('click', function(){
-      if(countLvl == -1)
-        nextLevel();
-    })
+  if (xpos > 166 && xpos < 166 + 129 && ypos > 420 && ypos < 420 + 80) {
+    canvas.addEventListener("click", function() {
+      if (countLvl == -1) nextLevel();
+    });
   }
 }
 
@@ -312,8 +297,6 @@ function lvl1() {
   obs1.drawPlat();
   obs2.drawPlat();
   obs3.drawPlat();
-
-
 
   goal1 = new Solid(450, 10, 500, 55, "yellow");
 }
@@ -365,7 +348,7 @@ function lvl3() {
   obs3.drawPlat();
   obs4.drawPlat();
 
-  goal1 = new Solid(450,450,50,50,"yellow");
+  goal1 = new Solid(450, 450, 50, 50, "yellow");
 }
 
 function lvl3editor() {
@@ -386,13 +369,12 @@ function lvl3editor() {
 
 // #endregion
 
-function lvl4(){
-  obs1 = new Solid(100, 380,389,50,"gray");
-
+function lvl4() {
+  obs1 = new Solid(100, 380, 389, 50, "gray");
 }
 
-function lvl4editor(){
-  intersect(mychar,obs1,false);
+function lvl4editor() {
+  intersect(mychar, obs1, false);
 
   obs1.update();
   mychar.update();
