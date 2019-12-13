@@ -1,13 +1,17 @@
 const canvas = document.getElementById("myCanvas");
 const context = canvas.getContext("2d");
 let countLvl = -2;
+let countframe = 0;
+let sec = 0;
 let gOver = false;
 let dead = false;
 let playmusic = false;
 let bgmusic = false;
 let jscare = false;
 let bgsound = new Audio("Skyrim-nighttime.mp3");
+let deathsound = new Audio("omae.mp3");
 let playoncejscare = false;
+let restartclick = false
 
 
 class Character {
@@ -132,7 +136,7 @@ mychar.drawChar();
 function animate() {
   requestAnimationFrame(animate);
   context.clearRect(0, 0, canvas.width, canvas.height);
-  timer();
+  
 
   // Check which key was pressed and call the appropriate Car function.
   window.addEventListener("keydown", doKeyDown); //add false parameter?
@@ -152,14 +156,19 @@ function animate() {
         break;
       case 2:
         lvl3editor();
+        break;
       case 3:
         lvl4editor();
         context.fillStyle = "black";
-        context.fillText("stay on edge and",20,300);
-        context.fillText("backstab your enemy",20,330);
+        context.fillText("Stay on the edge, backstab",5,300);
+        context.fillText("your enemy from its back",5,330);
+        break;
       case 4:
         finishscreeneditor();
+        break;
     }
+    if(countLvl >-1)
+    timer();
   }
   if (gOver == true) {
     drawBgImage("awake.jpg");
@@ -184,12 +193,13 @@ function animate() {
 function timer() {
   if (!gOver) {
     countframe++;
-    if (countframe % 60 == 0) {
+    if (countframe % 6 == 0) {
       sec++;
     }
-    document.getElementById("timer").innerHTML = +sec + "s";
-  } else {
-    document.getElementById("timer").innerHTML = +sec + "s game over";
+    document.getElementById("timer").innerHTML = +sec/10 + "s";
+  } 
+  else {
+    document.getElementById("timer").innerHTML = +sec/10 + "s game over";
   }
 }
 
@@ -207,10 +217,16 @@ function drawBgImage(source){
   context.drawImage(img, 0, 0, 500, 500);
 }
 
-function gameOverSound() {
+function gameOverSound(restart) {
   backgroundmusic(false);
-  let deathsound = new Audio("omae.mp3");
-  deathsound.play();
+  if(!restart){
+    deathsound.play();
+  }
+  else{
+    deathsound.pause();
+    deathsound.currentTime = 0;
+    console.log("im working");
+  }
 }
 
 function intersect(character, obstacle, AreUGood, AreUJumpscare) {
@@ -241,6 +257,7 @@ function intersect(character, obstacle, AreUGood, AreUJumpscare) {
     if(AreUJumpscare == true){
       console.log("PIKABOO");
       jscare = true
+      gOver = true;
     }
   } else {
     character.contact(false, "red");
@@ -326,7 +343,9 @@ function backgroundmusic(playit){
   }
   else
     bgsound.pause();
+    bgsound.currentTime = 0;
 }
+
 
 function nextLevel() {
   countLvl++;
@@ -349,6 +368,7 @@ function nextLevel() {
       break;
     case 4:
       finishscreen();
+      break;
   }
 }
 // #region lvl1
@@ -452,7 +472,7 @@ function lvl4(){
   obs9 = new Solid(240,65,20,15,"gold");
   obs10 = new Solid(242,64,16,1,"white");
   //invisible middle block
-  obs11 = new Solid(190,80,110,103,"rgba(248, 248, 255,0.42)");
+  obs11 = new Solid(190,80,110,103,"rgba(248, 248, 255,0.6)");
   //more wall
   obs12 = new Solid(0,200,182,100,"gray");
   obs13 = new Solid(0,0,174,200,"gray");
@@ -501,9 +521,26 @@ function lvl4editor(){
 // #endregion
 
 function finishscreen(){
-
+  drawBgImage("skyrim-victory.jpg")
+  document.getElementById("fastest").innerHTML = "hhey";
 }
 
 function finishscreeneditor(){
+  drawBgImage("skyrim-victory.jpg")
+}
 
+function restart(){
+  restartclick = true
+  countLvl = -1;
+  countframe = 0;
+  sec = 0;
+  gOver = false;
+  dead = false;
+  playmusic = false;
+  bgmusic = false;
+  jscare = false;
+  playoncejscare = false;
+  backgroundmusic(false);
+  gameOverSound(true);
+  document.getElementById("timer").innerHTML = '0.0s';
 }
