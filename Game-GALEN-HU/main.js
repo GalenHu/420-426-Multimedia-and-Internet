@@ -121,8 +121,10 @@ mychar.drawChar();
   context.rect(166,420,129,80)
   context.closePath();
   context.stroke();
-  context.font = "30px Arial";
-  context.fillText("Click here to start game",170,450,100)
+  context.font = "24px Arial";
+  context.fillText("Click here to start game",170,450,120)
+  context.fillText("97.9% of people couldn't pass the last lvl!", 40,115,400)
+  context.fillText("Use headphone for best experience",40,160,400)
 
 
 }
@@ -151,6 +153,11 @@ function animate() {
         lvl3editor();
       case 3:
         lvl4editor();
+        context.fillStyle = "black";
+        context.fillText("stay on edge and",20,300);
+        context.fillText("backstab your enemy",20,330);
+      case 4:
+        finishscreeneditor();
     }
   }
   if (gOver == true) {
@@ -314,7 +321,7 @@ function nextLevel() {
       menuStart();
       break;
     case 0:
-      // document.getElementById("myCanvas").style.cursor = "none";
+      document.getElementById("myCanvas").style.cursor = "none";
       lvl1();
       break;
     case 1:
@@ -326,6 +333,8 @@ function nextLevel() {
     case 3:
       lvl4();
       break;
+    case 4:
+      finishscreen();
   }
 }
 // #region lvl1
@@ -340,7 +349,7 @@ function lvl1() {
 
 
 
-  goal1 = new Solid(450, 10, 500, 55, "yellow");
+  goal1 = new Solid(450, 10, 500, 55, "gold");
 }
 
 function lvl1editor() {
@@ -363,7 +372,7 @@ function lvl1editor() {
 function lvl2() {
   console.log("This is lvl 2");
   obs1 = new Solid(100, 0, 300, 400, "tomato");
-  goal1 = new Solid(0, 0, 100, 100, "yellow");
+  goal1 = new Solid(0, 0, 100, 100, "gold");
   obs1.drawPlat();
 }
 
@@ -390,7 +399,7 @@ function lvl3() {
   obs3.drawPlat();
   obs4.drawPlat();
 
-  goal1 = new Solid(450,450,50,50,"yellow");
+  goal1 = new Solid(450,450,50,50,"gold");
 }
 
 function lvl3editor() {
@@ -411,12 +420,31 @@ function lvl3editor() {
 
 // #endregion
 
+// #region lvl4
+
 function lvl4(){
   obs1 = new Solid(100, 380,389,50,"gray");
-  obs2 = new Solid(0, 270, 300,95,"gray");
-  obs3 = new Solid(355,319,200,30,"gray");
+  obs2 = new Solid(0, 270, 300,90,"gray");
+  obs3 = new Solid(330,319,200,30,"gray");
   obs4 = new Solid(477,354,20,20,"white");
-  
+  obs5 = new Solid(300,270,150,20,"gray");
+  //left border
+  obs6 = new Solid(0,0,10,500,"gray");
+  //top border
+  obs7 = new Solid(0,0,500,10,"gray");
+  //right border
+  obs8 = new Solid(490,0,10,320,"gray");
+  //tricky block
+  obs9 = new Solid(240,65,20,15,"gold");
+  obs10 = new Solid(242,64,16,1,"white");
+  //invisible middle block
+  obs11 = new Solid(190,80,110,103,"rgba(248, 248, 255,0.42)");
+  //more wall
+  obs12 = new Solid(0,200,182,100,"gray");
+  obs13 = new Solid(0,0,174,200,"gray");
+  obs14 = new Solid(0,0,500,48,"gray");
+  obs15 = new Solid(320,48,180,192,"gray");
+  obs16 = new Solid(220,200,100,40,"gray");
 }
 
 function lvl4editor(){
@@ -424,10 +452,44 @@ function lvl4editor(){
   intersect(mychar,obs2,false);
   intersect(mychar,obs3,false);
   intersect(mychar,obs4,false,true);
+  intersect(mychar,obs5,false);
+  intersect(mychar,obs6,false,true);
+  intersect(mychar,obs7,false);
+  intersect(mychar,obs8,false,true);
+  intersect(mychar,obs9,false,true);
+  intersect(mychar,obs10,true);
+  intersect(mychar,obs11,false,true);
+  intersect(mychar,obs12,false);
+  intersect(mychar,obs13,false);
+  intersect(mychar,obs14,false);
+  intersect(mychar,obs15,false);
+  intersect(mychar,obs16,false);
+
   
   obs1.update();
   obs2.update();
   obs3.update();
   obs4.update();
+  obs5.update();
+  obs6.update();
+  obs7.update();
+  obs8.update();
+  obs9.update();
+  obs10.update();
+  obs11.update();
+  obs12.update();
+  obs13.update();
+  obs14.update();
+  obs15.update();
+  obs16.update();
   mychar.update();
+}
+// #endregion
+
+function finishscreen(){
+  
+}
+
+function finishscreeneditor(){
+
 }
