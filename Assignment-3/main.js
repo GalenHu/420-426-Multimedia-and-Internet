@@ -1,15 +1,6 @@
 M.AutoInit();
 
-<<<<<<< HEAD
 /******************************* INDEX.HTML **************************************/
-=======
-const url = "https://api.spacexdata.com/v3/"; //The root of the SpaceX API
-
-
-const rockets = "https://api.spacexdata.com/v3/rockets";
-
-//Header
->>>>>>> master
 const infoLink = "https://api.spacexdata.com/v3/info";	//info
 fetch(infoLink)
 	.then(response => response.json())
@@ -24,7 +15,6 @@ fetch(infoLink)
 
 function RequestInfo(info) {
 	//If the request was succesfull then data will have everything you asked for.
-<<<<<<< HEAD
 
 	document.getElementById("header_summary").innerHTML = info.summary;
 	document.getElementById("founder").innerHTML = info.founder;
@@ -35,16 +25,6 @@ function RequestInfo(info) {
 /******************************* INDEX.HTML **************************************/
 
 /******************************* NEXT.HTML **************************************/
-=======
-	console.log(info)
-
-	document.getElementById("header_summary").innerHTML = info.summary;
-	document.getElementById("founder").innerHTML = info.founder;
-	document.getElementById("founded").innerHTML = info.founded;
-};
-
-//Timer of next lauch
->>>>>>> master
 fetch("https://api.spacexdata.com/v3/launches/next") //next lauch
 	.then(response_next => response_next.json())
 	.then(next => {
@@ -58,13 +38,8 @@ fetch("https://api.spacexdata.com/v3/launches/next") //next lauch
 
 function doStuff3(next) {
 	//If the request was succesfull then data will have everything you asked for.
-<<<<<<< HEAD
 
     //countdown
-=======
-	console.log(next)
-
->>>>>>> master
 	let countDownDate = new Date(next.launch_date_utc).getTime();
 
 	let x = setInterval(function () {

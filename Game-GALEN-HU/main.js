@@ -15,6 +15,7 @@ let playoncejscare = false;
 let restartclick = false
 let playvictorymusiconce = false;
 let stop = false;
+let timeList = [];
 
 
 class Character {
@@ -33,7 +34,6 @@ class Character {
   }
 
   drawChar() {
-    //console.log("im a character");
     context.beginPath();
     context.arc(this.xPosition, this.yPosition, this.radius, 0, 2 * Math.PI);
     context.fillStyle = this.color;
@@ -178,7 +178,6 @@ function animate() {
     if (!dead) {
       gameOverSound();
       dead = true;
-      console.log("im dead");
     }
   }
   if(jscare == true){ 
@@ -195,7 +194,7 @@ function animate() {
 
 function timer() {
   if(stop == true){
-    document.getElementById("timer").innerHTML = +sec/10 + "s congratulation";
+    document.getElementById("timer").innerHTML = sec/10+"s";
   }
   else{
     if (!gOver) {
@@ -203,10 +202,10 @@ function timer() {
       if (countframe % 6 == 0) {
         sec++;
       }
-      document.getElementById("timer").innerHTML = +sec/10 + "s";
+      document.getElementById("timer").innerHTML = sec/10 + "s";
     } 
     else {
-      document.getElementById("timer").innerHTML = +sec/10 + "s game over";
+      document.getElementById("timer").innerHTML = sec/10 + "s game over";
     }
   }
 
@@ -220,7 +219,6 @@ function realJump(){
 }
 
 function drawBgImage(source){
-  // console.log("drawing image");
   let img = document.createElement("img");
   img.src = source;
   context.drawImage(img, 0, 0, 500, 500);
@@ -234,7 +232,6 @@ function gameOverSound(restart) {
   else{
     deathsound.pause();
     deathsound.currentTime = 0;
-    console.log("im working");
   }
 }
 
@@ -262,25 +259,17 @@ function intersect(character, obstacle, AreUGood, AreUJumpscare) {
     myBottom > obstacle.y1 &&
     myTop < obstacle.y1 + obstacle.y2
   ) {
-    console.log(
-      obstacle.x1,
-      obstacle.y1,
-      obstacle.x1 + obstacle.x2,
-      obstacle.y1 + obstacle.y2,
-      "game Over"
-    );
     if (AreUGood == false && AreUJumpscare == undefined) {
       gOver = true
       document.getElementById("myCanvas").style.cursor = "initial";
     }
     if (AreUGood == true) {
-      console.log("Next Level");
       nextLevel();
     }
     if(AreUJumpscare == true){
-      console.log("PIKABOO");
       jscare = true
       gOver = true;
+      document.getElementById("myCanvas").style.cursor = "initial";
     }
   } else {
     character.contact(false, "red");
@@ -289,7 +278,6 @@ function intersect(character, obstacle, AreUGood, AreUJumpscare) {
 }
 
 function doKeyDown(e) {
-  // console.log("test");
   if (e.keyCode == "38" || e.keyCode == "87") {
     // up arrow
     mychar.up = true;
@@ -343,14 +331,13 @@ function findObjectCoords(mouseEvent) {
   }
   xpos -= obj_left;
   ypos -= obj_top;
-  document.getElementById("objectCoords").innerHTML = xpos + ", " + ypos;
-  console.log(xpos + ", " + ypos);
+  // document.getElementById("objectCoords").innerHTML = xpos + ", " + ypos;
+  // console.log(xpos + ", " + ypos);
   mychar.xPosition = xpos;
   mychar.yPosition = ypos
 
   if(xpos > 166 && xpos < 166+129 && ypos > 420 && ypos < 420+80){
     canvas.addEventListener('click', function(){
-      console.log("music start to play");
       if(bgmusic == false){
         backgroundmusic(true);
         bgmusic = true
@@ -427,7 +414,6 @@ function lvl1editor() {
 
 // #region lvl2
 function lvl2() {
-  console.log("This is lvl 2");
   obs1 = new Solid(100, 0, 300, 400, "tomato");
   goal1 = new Solid(0, 0, 100, 100, "gold");
   obs1.drawPlat();
@@ -445,7 +431,6 @@ function lvl2editor() {
 // #region lvl3
 
 function lvl3() {
-  console.log("This is lvl3");
   obs1 = new Solid(100, 0, 50, 450, "slateblue");
   obs2 = new Solid(200, 50, 50, 450, "slateblue");
   obs3 = new Solid(300, 0, 50, 450, "slateblue");
@@ -493,7 +478,7 @@ function lvl4(){
   obs8 = new Solid(490,0,10,320,"gray");
   //tricky block
   obs9 = new Solid(240,65,20,15,"gold");
-  obs10 = new Solid(242,64,16,1,"white");
+  obs10 = new Solid(242,63,16,2,"white");
   //invisible middle block
   obs11 = new Solid(190,80,110,103,"rgba(248, 248, 255,0.6)");
   //more wall
@@ -545,9 +530,19 @@ function lvl4editor(){
 
 function finishscreen(){
   // drawBgImage("skyrim-victory.jpg")
-  document.getElementById("fastest").innerHTML = "hhey";
+  fastesttime();
   stop = true;
   document.getElementById("myCanvas").style.cursor = "initial";
+}
+
+function fastesttime(){
+  let records = document.getElementById("fastest");
+  let p = document.createElement("p");
+  let time = document.getElementById("timer").childNodes[0];
+  p.innerHTML = time.nodeValue;
+  timeList.push(time.nodeValue);
+
+  records.appendChild(p);
 }
 
 function finishscreeneditor(){
@@ -556,6 +551,7 @@ function finishscreeneditor(){
 }
 
 function restart(){
+  document.getElementById("myCanvas").style.cursor = "initial";
   stop = false
   restartclick = true
   countLvl = -1;
@@ -567,7 +563,6 @@ function restart(){
   bgmusic = false;
   jscare = false;
   playoncejscare = false;
-  console.log("Asdf");
   playvictorymusiconce = false;
   backgroundmusic(false);
   gameOverSound(true);
