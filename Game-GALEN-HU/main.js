@@ -391,8 +391,6 @@ function lvl1() {
   obs2.drawPlat();
   obs3.drawPlat();
 
-
-
   goal1 = new Solid(450, 10, 500, 55, "gold");
 }
 
@@ -535,13 +533,18 @@ function finishscreen(){
   document.getElementById("myCanvas").style.cursor = "initial";
 }
 
+let playedcounter = 0;
 function fastesttime(){
   let records = document.getElementById("fastest");
+  records.innerHTML = "";
   let p = document.createElement("p");
   let time = document.getElementById("timer").childNodes[0];
   p.innerHTML = time.nodeValue;
   timeList.push(time.nodeValue);
-
+  if(playedcounter++>0){
+    let test = timeList.filter(item => item < item)
+    console.log(test);
+  }
   records.appendChild(p);
 }
 
