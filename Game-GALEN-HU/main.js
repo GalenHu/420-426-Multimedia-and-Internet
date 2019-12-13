@@ -194,7 +194,7 @@ function animate() {
 
 function timer() {
   if(stop == true){
-    document.getElementById("timer").innerHTML = sec/10+"s";
+    document.getElementById("timer").innerHTML = sec/10;
   }
   else{
     if (!gOver) {
@@ -202,10 +202,10 @@ function timer() {
       if (countframe % 6 == 0) {
         sec++;
       }
-      document.getElementById("timer").innerHTML = sec/10 + "s";
+      document.getElementById("timer").innerHTML = sec/10;
     } 
     else {
-      document.getElementById("timer").innerHTML = sec/10 + "s game over";
+      document.getElementById("timer").innerHTML = sec/10 + " game over";
     }
   }
 
@@ -535,17 +535,27 @@ function finishscreen(){
 
 let playedcounter = 0;
 function fastesttime(){
-  let records = document.getElementById("fastest");
-  records.innerHTML = "";
+  let myfastestTime = document.getElementById("fastest");
+  myfastestTime.innerHTML = Math.min(...timeList);
   let p = document.createElement("p");
   let time = document.getElementById("timer").childNodes[0];
-  p.innerHTML = time.nodeValue;
+  p = time.nodeValue;
   timeList.push(time.nodeValue);
-  if(playedcounter++>0){
-    let test = timeList.filter(item => item < item)
-    console.log(test);
+  if(p<Math.min(...timeList) && playedcounter++ >0){
+    myfastestTime.innerHTML = p;
   }
-  records.appendChild(p);
+  else{
+    myfastestTime.innerHTML = Math.min(...timeList);
+  }
+  // if(playedcounter++>0){
+  //   // let test = timeList.filter(item => item < item)
+  //   // console.log(test);
+  //   // console.log(timeList);
+  //   // // myfastestTime.appendChild()
+  //   // if(time.nodeValue < myfastestTime.childNodes[0])
+  //   //   myfastestTime.appendChild(p);
+  // }
+  // else
 }
 
 function finishscreeneditor(){
