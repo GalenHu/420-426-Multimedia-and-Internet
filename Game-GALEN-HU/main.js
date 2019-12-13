@@ -10,8 +10,11 @@ let bgmusic = false;
 let jscare = false;
 let bgsound = new Audio("Skyrim-nighttime.mp3");
 let deathsound = new Audio("omae.mp3");
+let victory = new Audio("fortnite.mp3");
 let playoncejscare = false;
 let restartclick = false
+let playvictorymusiconce = false;
+let stop = false;
 
 
 class Character {
@@ -191,16 +194,22 @@ function animate() {
 }
 
 function timer() {
-  if (!gOver) {
-    countframe++;
-    if (countframe % 6 == 0) {
-      sec++;
-    }
-    document.getElementById("timer").innerHTML = +sec/10 + "s";
-  } 
-  else {
-    document.getElementById("timer").innerHTML = +sec/10 + "s game over";
+  if(stop == true){
+    document.getElementById("timer").innerHTML = +sec/10 + "s congratulation";
   }
+  else{
+    if (!gOver) {
+      countframe++;
+      if (countframe % 6 == 0) {
+        sec++;
+      }
+      document.getElementById("timer").innerHTML = +sec/10 + "s";
+    } 
+    else {
+      document.getElementById("timer").innerHTML = +sec/10 + "s game over";
+    }
+  }
+
 }
 
 function realJump(){
@@ -229,6 +238,18 @@ function gameOverSound(restart) {
   }
 }
 
+function victorytheme(restart){
+  if(!playvictorymusiconce){
+    backgroundmusic(false);
+    victory.play()
+    playvictorymusiconce = true
+  }
+  if(restart){
+    victory.pause();
+    victory.currentTime = 0;
+  }
+}
+
 function intersect(character, obstacle, AreUGood, AreUJumpscare) {
   myLeft = character.xPosition - character.radius;
   myRight = character.xPosition + character.radius;
@@ -249,6 +270,7 @@ function intersect(character, obstacle, AreUGood, AreUJumpscare) {
     );
     if (AreUGood == false && AreUJumpscare == undefined) {
       gOver = true
+      document.getElementById("myCanvas").style.cursor = "initial";
     }
     if (AreUGood == true) {
       console.log("Next Level");
@@ -521,15 +543,19 @@ function lvl4editor(){
 // #endregion
 
 function finishscreen(){
-  drawBgImage("skyrim-victory.jpg")
+  // drawBgImage("skyrim-victory.jpg")
   document.getElementById("fastest").innerHTML = "hhey";
+  stop = true;
+  document.getElementById("myCanvas").style.cursor = "initial";
 }
 
 function finishscreeneditor(){
   drawBgImage("skyrim-victory.jpg")
+  victorytheme();
 }
 
 function restart(){
+  stop = false
   restartclick = true
   countLvl = -1;
   countframe = 0;
@@ -542,5 +568,6 @@ function restart(){
   playoncejscare = false;
   backgroundmusic(false);
   gameOverSound(true);
+  victorytheme(true);
   document.getElementById("timer").innerHTML = '0.0s';
 }

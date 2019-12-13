@@ -1,3 +1,7 @@
+body{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 #bigcontainer{
   display: flex;
   flex-direction: row;
@@ -13,5 +17,6 @@
 
 #animegirl{
   height: 200px;
+
 }
 
