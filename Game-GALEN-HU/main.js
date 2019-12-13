@@ -247,6 +247,7 @@ function victorytheme(restart){
   if(restart){
     victory.pause();
     victory.currentTime = 0;
+    playvictorymusiconce = false;
   }
 }
 
@@ -566,6 +567,8 @@ function restart(){
   bgmusic = false;
   jscare = false;
   playoncejscare = false;
+  console.log("Asdf");
+  playvictorymusiconce = false;
   backgroundmusic(false);
   gameOverSound(true);
   victorytheme(true);
