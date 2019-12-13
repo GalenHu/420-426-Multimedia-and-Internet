@@ -132,6 +132,7 @@ mychar.drawChar();
 function animate() {
   requestAnimationFrame(animate);
   context.clearRect(0, 0, canvas.width, canvas.height);
+  timer();
 
   // Check which key was pressed and call the appropriate Car function.
   window.addEventListener("keydown", doKeyDown); //add false parameter?
@@ -179,6 +180,19 @@ function animate() {
     }
   }
 }
+
+function timer() {
+  if (!gOver) {
+    countframe++;
+    if (countframe % 60 == 0) {
+      sec++;
+    }
+    document.getElementById("timer").innerHTML = +sec + "s";
+  } else {
+    document.getElementById("timer").innerHTML = +sec + "s game over";
+  }
+}
+
 function realJump(){
   backgroundmusic(false);
   let scream = new Audio("Hello.mp3")
@@ -487,7 +501,7 @@ function lvl4editor(){
 // #endregion
 
 function finishscreen(){
-  
+
 }
 
 function finishscreeneditor(){
